@@ -18,6 +18,23 @@
   font-weight: 500;
 }
 
+@font-face {
+  font-family: Montserrat;
+  src: url(fonts/Montserrat-SemiBold.ttf) format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(fonts/Montserrat-Bold.ttf) format('truetype');
+  font-weight: 700;
+}
+
+/* fixes focus scrolling*/
+html .ui-page-active {
+    overflow: hidden !important;
+}
+
 body{
     border: none;
     color: black !important;
@@ -129,17 +146,6 @@ p{
 }
 
 
-/* SLIDER RANGE 
-.box .ui-slider-track {
-    margin-left: 15px;
-}*/
-
-/* fixes focus scrolling*/
-html .ui-page-active {
-    overflow: hidden !important;
-}
-
-
 /* FOOTER */
 
 #footer {
@@ -152,7 +158,7 @@ html .ui-page-active {
 }
 
 
-/* WELCOME */
+/* WELCOME POPUPS */
 .popup{
     position: absolute;
     top: 50%;
@@ -165,7 +171,7 @@ html .ui-page-active {
     border-radius: 10px;
 }
 
-#welcome-popup{
+#welcome-popup, #error-popup{
     padding: 7%;
 }
 
@@ -209,7 +215,22 @@ html .ui-page-active {
     width: 100px;
 }
 
+#error-button{
+    background-color: #720026;
+    border: 2px solid #720026;
+    color: white;
+    border-radius: 10px;
+    width: auto;
+    margin:0 auto;
+    margin-top: 20px;
+    transition-duration: 0.4s;
+}
 
+#error-button:hover{
+    background-color: transparent;
+}
+
+/* SLIDER */
 /* Hide the number input */
 .full-width-slider input {
     display: none;
@@ -232,3 +253,8 @@ html .ui-page-active {
 #label-2{
     right: 8.33%;
 }
+
+/* SLIDER RANGE 
+.box .ui-slider-track {
+    margin-left: 15px;
+}*/

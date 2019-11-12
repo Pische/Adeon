@@ -19,7 +19,7 @@ var World = {
     /*  True se è la prima volta che avvia l'app */
     firstTime: true,
 
-    count: 0,
+    maxRange: 3000,
 
     locationUpdateCounter: 0,
     updatePlacemarkDistancesEveryXLocationUpdates: 10,
@@ -92,6 +92,8 @@ var World = {
         /* Aggiorna le informazioni sulla distanza dell'utente da ogni POI*/
         World.updateDistanceToUserValues();
 
+        /* Imposto il range massimo (3km) */
+        AR.context.scene.cullingDistance = World.maxRange;
 
         /* Set distance slider to 3km. 
         $("#slider-12").val(3);
@@ -235,27 +237,29 @@ var World = {
         var slider_value = $("#slider-12").val();
 
         /* Max range relative to the maximum distance of all visible places.*/
-        var maxRangeMeters = slider_value * 1000;
+        var RangeUserValue = slider_value * 1000;
 
         /* Numero di posti mostrati all'interno del range */
-        var placesInRange = World.getNumberOfVisiblePlacesInRange(maxRangeMeters);
+        var placesInRange = World.getNumberOfVisiblePlacesInRange(RangeUserValue);
 
-        if (placesInRange > 0) {
-            /*
-                Aggiorno la distanza di abbattimento (culling distance) così solo i
-                luoghi all'interno del range scelto vengono renderizzati
-                *   scene.cullingDistance - int
-                    La distanza massima alla quale i marker sono visibili nella
-                    scena, in metri. Se la distanza di un oggetto è maggiore
-                    rispetto alla distanza di abbattimento (culling distance),
-                    l'oggetto non sarà visibile nella scena
-                    Default Value: 50000
-            */
-            AR.context.scene.cullingDistance = maxRangeMeters;
+        if (placesInRange == 0) {
+            $("#error-popup").show();
+            $("#error-button").click(function () {
+                $("#error-popup").hide();
+            });
         }
-        else {
-            alert("ERRORE: NESSUN LUOGO TROVATO. PROVA AD AUMENTARE IL RANGE");
-        }
+
+        /*
+            Aggiorno la distanza di abbattimento (culling distance) così solo i
+            luoghi all'interno del range scelto vengono renderizzati
+            *   scene.cullingDistance - int
+                La distanza massima alla quale i marker sono visibili nella
+                scena, in metri. Se la distanza di un oggetto è maggiore
+                rispetto alla distanza di abbattimento (culling distance),
+                l'oggetto non sarà visibile nella scena
+                Default Value: 50000
+        */
+        AR.context.scene.cullingDistance = RangeUserValue;
         
     },
 
@@ -263,7 +267,7 @@ var World = {
         Ritorna il numero di posti con una distanza minore o uguale a
         quella scelta dall'utente
     */
-    getNumberOfVisiblePlacesInRange: function getNumberOfVisiblePlacesInRangeFn(maxRangeMeters) {
+    getNumberOfVisiblePlacesInRange: function getNumberOfVisiblePlacesInRangeFn(RangeUserValue) {
 
         /*  Ordina i markers in base alla distanza dall'utente*/
 
@@ -274,7 +278,7 @@ var World = {
             quando trovo un luogo con distanza maggiore rispetto al range
         */
         for (var i = 0; i < World.markerList.length; i++) {
-            if (World.markerList[i].distanceToUser > maxRangeMeters) {
+            if (World.markerList[i].distanceToUser > RangeUserValue) {
                 return i;
             }
         }
@@ -388,6 +392,7 @@ $(document).ready(function () {
     $("#welcome-popup").hide();
     $("#category-popup").hide();
     $("#range-popup").hide();
+    $("#error-popup").hide();
     $("#hand").hide(); //ancora da inserire
 
     /* Nascondo le main icons*/

@@ -214,6 +214,8 @@
     <BundleResource Include="Resources\Milan\assets\icons\text.png" />
     <BundleResource Include="Resources\Milan\assets\icons\english.png" />
     <BundleResource Include="Resources\Milan\assets\icons\architecture.png" />
+    <BundleResource Include="Resources\Milan\css\fonts\Montserrat-SemiBold.ttf" />
+    <BundleResource Include="Resources\Milan\css\fonts\Montserrat-Bold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Milan\css\fonts\" />
