@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <!--  basic meta information -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="application/json; charset=utf-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes,viewport-fit=cover" name="viewport">
+
+    <title>Adeon</title>
+
+    <script src="https://www.wikitude.com/libs/architect.js"></script>
+    <script src="../ade.js"></script>
+
+    <!-- important for static POI loading - include the static data  -->
+    <script type="text/javascript" src="js/myjsondata.js"></script>
+
+    <!-- jquery mobile CSS -->
+    <link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css" />
+
+    <!-- required to set background transparent & enable "click through" -->
+    <link rel="stylesheet" href="css/stylesheet.css" />
+
+    <!-- jquery JS files -->
+    <script type="text/javascript" src="jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="jquery/jquery.mobile-1.4.5.min.js"></script>
+
+    <!-- Script per swipe up-->
+    <script type="text/javascript" src="js/swipeup.js"></script>
+
+    <!-- marker representation-->
+    <script src="js/marker.js"></script>
+
+    <!-- World logic-->
+    <script type="text/javascript" src="js/WorldLogic.js"></script>
+</head>
+<body>
+    <div data-role="page" style="background: none;">
+        <!-- MAIN PAGE CONTENT -->
+        <div role="main" class="ui-content">
+            <!-- Main Icons -->
+
+            <!--RANGE-->
+            <a href="javascript: World.showRange();" class="ui-btn-left ui-btn ui-btn-inline ui-corner-all trasparent-btn">
+                <img src="assets/icons/range.png" alt="Range" id="range">
+            </a>
+
+            <!--SETTINGS-->
+            <a href="javascript: World.showSettings();" class="ui-btn-right ui-btn ui-btn-inline ui-corner-all trasparent-btn">
+                <img src="assets/icons/settings.png" alt="Impostazioni" class="main-icons" id="settings">
+            </a>
+
+            <!--HELP-->
+            <a href="javascript: World.showHelp();" class="ui-btn-right ui-btn ui-btn-inline ui-corner-all trasparent-btn">
+                <img src="assets/icons/help.png" alt="Aiuto" class="main-icons" id="help">
+            </a>
+        </div>
+
+        <!-- FOOTER -->
+        <div data-role="footer" id="footer" class="ui-bar" data-position="fixed" style="text-align:center;">
+            <!-- SWIPE UP -->
+            <img src="assets/icons/swipeup.png" alt="SwipeUp" id="swipeup">
+        </div>
+
+        <!-- SWIPE UP BOX -->
+        <div class="box" id="swipe-box">
+            <!-- ARTE -->
+            <a href="javascript: World.onArt();">
+                <img src="assets/icons/art.png" alt="Art" class="box-icons" id="art">
+            </a>
+            <!-- ARCHITETTURA -->
+            <a href="javascript: World.onArchitecture();">
+                <img src="assets/icons/architecture.png" alt="Architecture" class="box-icons" id="architecture">
+            </a>
+            <!-- LUOGHI SEGRETI -->
+            <a href="javascript: World.onSecret();">
+                <img src="assets/icons/spots.png" alt="SecretSpots" class="box-icons" id="secret_spots">
+            </a>
+        </div>
+
+        <!-- RANGE BOX -->
+        <div class="box" id="range-box">
+            <!--  SLIDER -->
+            <label id="label-1">1km</label>
+            <form class="full-width-slider">
+                <input type="range" name="slider-12" id="slider-12" min="1" max="3" value="3" step="0.1"
+                        data-show-value="true">
+            </form>
+            <label id="label-2">3km</label>
+        </div>
+        <!-- BOX DI BENVENUTO -->
+        <div class="popup" id="welcome-popup">
+            <h1>CIAO!</h1>
+            <h2>Cosa puoi fare su Adeon?</h2>
+            <p>Scoprire aneddoti e fatti strani su musei, opere architettoniche, di design e sui luoghi nascosti di Milano</p>
+        </div>
+
+        <div class="popup" id="category-popup">
+            <h1>SELEZIONA LA CATEGORIA</h1>
+            <p>Scopri gli aneddoti della categoria che ti interessa di più</p>
+            <div class="select-category">
+                <div class="elenco">
+                    <img src="assets/icons/art.png" class="icon-mini">
+                    <div class="elenco-testo">
+                        <p>ARTE: musei</p>
+                    </div>
+                </div>
+
+                <div class="elenco">
+                    <img src="assets/icons/architecture.png" class="icon-mini">
+                    <div class="elenco-testo">
+                        <p>ARCHITETTURA: chiese, ville, monumenti, design</p>
+                    </div>
+                </div>
+
+                <div class="elenco">
+                    <img src="assets/icons/spots.png" class="icon-mini">
+                    <div class="elenco-testo">
+                        <p>MILANO NASCOSTA: luoghi segreti</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup" id="range-popup">
+            <h1>SCEGLI LA DISTANZA</h1>
+            <p>Imposta il raggio di azione da 1 a 3 km.<br>Successivamente potrai modificarlo</p>
+        </div>
+
+        <!-- FRECCIA TUTORIAL -->
+        <img src="assets/icons/arrow.png" id="hand">
+    </div>
+</body>
+</html>

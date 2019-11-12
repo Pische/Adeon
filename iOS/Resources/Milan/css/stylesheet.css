@@ -1,0 +1,234 @@
+﻿/*@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Poppins:400,500,600&display=swap');*/
+
+@font-face {
+  font-family: Poppins;
+  src: url(fonts/Poppins-SemiBold.ttf) format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url(fonts/Poppins-Bold.ttf) format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(fonts/Montserrat-Medium.ttf) format('truetype');
+  font-weight: 500;
+}
+
+body{
+    border: none;
+    color: black !important;
+    text-shadow: none !important;
+    background-color: none;
+    background-image: none;
+    background: none !important;
+}
+
+/* TITOLI IN POPPINS BOLD E SEMIBOLD */
+h1{
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 24px !important;
+    color: white !important;
+    text-shadow: none !important;
+    margin:0 !important;
+    margin-bottom: 20px !important;
+}
+
+h2{
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    color: white !important;
+    text-shadow: none !important;
+    margin:0 !important;
+    margin-bottom: 20px !important;
+}
+
+/* PARAGRAFI IN MONTSERRAT MEDIUM */
+p{
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    color: white !important;
+    text-shadow: none !important;
+    margin:0 !important;
+}
+
+
+/* ICONE MAIN PAGE */
+.trasparent-btn{
+    box-shadow:none !important;
+    background:none !important;
+    background-color:none !important;
+    border:none !important;
+}
+
+.main-icons{
+    width: 40px !important;
+    height: 40px !important;
+}
+
+#range{
+    width: 40px !important;
+    height: 45px !important;
+    margin-top: 20px !important;
+}
+
+#settings{
+    margin-top: 20px !important;
+}
+
+#help{
+    margin-top: 100px !important;
+}
+
+
+/*BOX SWIPE UP*/
+.box{
+    position:fixed;
+    bottom:-100%;
+    height: 15%;
+    width: 100%;
+    background: rgba(25,0,4,.85);
+    display: block;
+    z-index: 999999;
+    border-radius: 10px;
+    padding-left: 0;
+    margin: auto;
+    text-align: center;
+}
+
+.box-icons{
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+#art{
+    left: 8.33%;
+}
+
+
+#architecture{
+    /*left: 40.5%;*/
+    /*right: 41.66%;*/
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+#secret_spots{
+    right: 8.33%;
+}
+
+
+/* SLIDER RANGE 
+.box .ui-slider-track {
+    margin-left: 15px;
+}*/
+
+/* fixes focus scrolling*/
+html .ui-page-active {
+    overflow: hidden !important;
+}
+
+
+/* FOOTER */
+
+#footer {
+    background-color: none !important;
+    background-image: none !important;
+    background: none !important;
+    border: 0px solid #aaa !important;
+    padding-bottom: 30px !important;
+    padding-left: 0;
+}
+
+
+/* WELCOME */
+.popup{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Yep! */
+    width: 80%;
+    text-align: center;
+    box-sizing:border-box;
+    background: rgba(25,0,4,.85);
+    border-radius: 10px;
+}
+
+#welcome-popup{
+    padding: 7%;
+}
+
+#category-popup{
+    padding: 7% 3% 0 3%;
+}
+
+#range-popup{
+    padding: 3%;
+}
+
+.select-category{
+    padding: 5%;
+    text-align: left;
+    margin: 0px;
+}
+
+.icon-mini{
+    width: 50px !important;
+    height: 50px !important;
+    margin-right: 8%;
+    float: left;
+}
+
+.elenco{
+    margin-bottom: 10px;
+    overflow: hidden !important;
+    display: flex;
+    align-items:center;
+}
+
+.elenco-testo{
+    float: left;
+}
+
+#arrow{
+    position:absolute;
+    bottom: 100px;
+    margin:0;
+    height: 100px;
+    width: 100px;
+}
+
+
+/* Hide the number input */
+.full-width-slider input {
+    display: none;
+}
+.full-width-slider .ui-slider-track {
+    margin: 0 auto;
+    width: 30%;
+}
+
+.slider-container{
+    margin: auto;
+    text-align: center;
+}
+
+#label-1{
+     left: 8.33%;
+}
+
+
+#label-2{
+    right: 8.33%;
+}

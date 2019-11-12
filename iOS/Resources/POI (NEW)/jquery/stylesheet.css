@@ -1,0 +1,46 @@
+﻿body{
+    border: 0px solid #aaa /*{c-body-border}*/ !important;
+    color: #333 /*{c-body-color}*/ !important;
+    text-shadow: 0 /*{c-body-shadow-x}*/ 1px /*{c-body-shadow-y}*/ 0 /*{c-body-shadow-radius}*/ #fff /*{c-body-shadow-color}*/ !important;
+    /* background: transparent; */
+    background-color: none !important;
+    background-image: none !important;
+    background: none !important;
+}
+
+/* in case you want to change color of selector-circle 
+.ui-btn {
+    background: red; 
+    background-color: red;
+    background-image:none;
+}
+*/
+
+#header-status, #footer {
+    background-color: none !important;
+    background-image: none !important;
+    background: none !important;
+    border: 0px solid #aaa !important;
+}
+
+.ui-slider-input {
+    background: lightgrey !important;
+    background-color: lightgrey !important;
+    background-image: none !important;
+}
+
+.ui-slider-popup {
+    background: lightgrey !important;
+    background-color: lightgrey !important;
+    background-image: none !important;
+}
+
+/* fixes focus scrolling */
+html .ui-page-active {
+    overflow: hidden !important;
+}
+
+/* fixes info button not centered */
+.ui-footer-fixed {
+    padding-left: 0 !important;
+}

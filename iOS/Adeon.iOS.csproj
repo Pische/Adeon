@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{1B04F32C-9D68-455E-8552-27E828B91B5E}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Adeon.iOS</RootNamespace>
+    <AssemblyName>Adeon.iOS</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>Apple Development: pischetolavincenzo@icloud.com (WL9ZPMF4K8)</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchFastDev>true</MtouchFastDev>
+    <IOSDebuggerPort>32444</IOSDebuggerPort>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <PlatformTarget>x86</PlatformTarget>
+    <IpaPackageName></IpaPackageName>
+    <CodesignProvision>iOS Team Provisioning Profile: com.adeonAR.Adeon</CodesignProvision>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <PlatformTarget>x86</PlatformTarget>
+    <NoWarn></NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>Apple Development: pischetolavincenzo@icloud.com (WL9ZPMF4K8)</CodesignKey>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <IOSDebuggerPort>37520</IOSDebuggerPort>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodesignProvision>iOS Team Provisioning Profile: com.adeonAR.Adeon</CodesignProvision>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="System.Json" />
+    <Reference Include="Xamarin.Wikitude.SDK.JS.iOS">
+      <HintPath>..\packages\Xamarin.Wikitude.SDK.JS.8.9.1\lib\xamarinios10\Xamarin.Wikitude.SDK.JS.iOS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="Main.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="ViewController.cs" />
+    <Compile Include="ViewController.designer.cs">
+      <DependentUpon>ViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CoreServices\iOSArExperienceConverter.cs" />
+    <Compile Include="CoreServices\ArExperienceAuthorizationController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ade.js" />
+    <BundleResource Include="Resources\POI %28NEW%29\index.html" />
+    <BundleResource Include="Resources\POI %28NEW%29\.DS_Store" />
+    <BundleResource Include="Resources\POI %28NEW%29\css\poi-radar.css" />
+    <BundleResource Include="Resources\POI %28NEW%29\js\radar.js" />
+    <BundleResource Include="Resources\POI %28NEW%29\js\myjsondata.js" />
+    <BundleResource Include="Resources\POI %28NEW%29\js\WorldLogic.js" />
+    <BundleResource Include="Resources\POI %28NEW%29\js\marker.js" />
+    <BundleResource Include="Resources\POI %28NEW%29\jquery\jquery.mobile-1.4.5.min.js" />
+    <BundleResource Include="Resources\POI %28NEW%29\jquery\.DS_Store" />
+    <BundleResource Include="Resources\POI %28NEW%29\jquery\jquery.mobile-1.4.5.min.css" />
+    <BundleResource Include="Resources\POI %28NEW%29\jquery\jquery-1.9.1.min.js" />
+    <BundleResource Include="Resources\POI %28NEW%29\jquery\stylesheet.css" />
+    <BundleResource Include="Resources\POI %28NEW%29\jquery\images\ajax-loader.gif" />
+    <BundleResource Include="Resources\POI %28NEW%29\jquery\images\icons-18-black.png" />
+    <BundleResource Include="Resources\POI %28NEW%29\jquery\images\icons-36-white.png" />
+    <BundleResource Include="Resources\POI %28NEW%29\jquery\images\icons-18-white.png" />
+    <BundleResource Include="Resources\POI %28NEW%29\jquery\images\icons-36-black.png" />
+    <BundleResource Include="Resources\POI %28NEW%29\assets\radar_bg.png" />
+    <BundleResource Include="Resources\POI %28NEW%29\assets\marker_selected.png" />
+    <BundleResource Include="Resources\POI %28NEW%29\assets\radar_north.png" />
+    <BundleResource Include="Resources\POI %28NEW%29\assets\marker_idle.png" />
+    <BundleResource Include="Resources\POI %28NEW%29\assets\indi.png" />
+    <BundleResource Include="Resources\POI\index.html" />
+    <BundleResource Include="Resources\POI\.DS_Store" />
+    <BundleResource Include="Resources\POI\css\poi-radar.css" />
+    <BundleResource Include="Resources\POI\js\radar.js" />
+    <BundleResource Include="Resources\POI\js\myjsondata.js" />
+    <BundleResource Include="Resources\POI\js\WorldLogic.js" />
+    <BundleResource Include="Resources\POI\js\marker.js" />
+    <BundleResource Include="Resources\POI\jquery\jquery-1.9.1.min.js" />
+    <BundleResource Include="Resources\POI\jquery\jquery-mobile-transparent-ui-overlay.css" />
+    <BundleResource Include="Resources\POI\jquery\jquery.mobile-1.3.2.min.css" />
+    <BundleResource Include="Resources\POI\jquery\jquery.mobile-1.3.2.min.js" />
+    <BundleResource Include="Resources\POI\jquery\images\ajax-loader.gif" />
+    <BundleResource Include="Resources\POI\jquery\images\icons-18-black.png" />
+    <BundleResource Include="Resources\POI\jquery\images\icons-36-white.png" />
+    <BundleResource Include="Resources\POI\jquery\images\icons-18-white.png" />
+    <BundleResource Include="Resources\POI\jquery\images\icons-36-black.png" />
+    <BundleResource Include="Resources\POI\assets\radar_bg.png" />
+    <BundleResource Include="Resources\POI\assets\marker_selected.png" />
+    <BundleResource Include="Resources\POI\assets\radar_north.png" />
+    <BundleResource Include="Resources\POI\assets\marker_idle.png" />
+    <BundleResource Include="Resources\POI\assets\indi.png" />
+    <BundleResource Include="Resources\Milan\index.html" />
+    <BundleResource Include="Resources\Milan\js\myjsondata.js" />
+    <BundleResource Include="Resources\Milan\js\WorldLogic.js" />
+    <BundleResource Include="Resources\Milan\js\marker.js" />
+    <BundleResource Include="Resources\Milan\jquery\jquery.mobile-1.4.5.min.js" />
+    <BundleResource Include="Resources\Milan\jquery\.DS_Store" />
+    <BundleResource Include="Resources\Milan\jquery\jquery.mobile-1.4.5.min.css" />
+    <BundleResource Include="Resources\Milan\jquery\jquery-1.9.1.min.js" />
+    <BundleResource Include="Resources\Milan\jquery\images\ajax-loader.gif" />
+    <BundleResource Include="Resources\Milan\jquery\images\icons-18-black.png" />
+    <BundleResource Include="Resources\Milan\jquery\images\icons-36-white.png" />
+    <BundleResource Include="Resources\Milan\jquery\images\icons-18-white.png" />
+    <BundleResource Include="Resources\Milan\jquery\images\icons-36-black.png" />
+    <BundleResource Include="Resources\Milan\css\stylesheet.css" />
+    <BundleResource Include="Resources\Milan\js\swipeup.js" />
+    <BundleResource Include="Resources\Milan\css\fonts\.DS_Store" />
+    <BundleResource Include="Resources\Milan\css\fonts\Montserrat-Medium.ttf" />
+    <BundleResource Include="Resources\Milan\css\fonts\Poppins-SemiBold.ttf" />
+    <BundleResource Include="Resources\Milan\assets\.DS_Store" />
+    <BundleResource Include="Resources\Milan\assets\box\.DS_Store" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxArchitettura.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxArtSelected.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxSecretSpots.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxArchitetturaSelected.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxArt.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxSpotsSelected.png" />
+    <BundleResource Include="Resources\Milan\css\fonts\Poppins-Bold.ttf" />
+    <BundleResource Include="Resources\Milan\assets\icons\hand-close.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\spots.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\spots_selected.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\settings.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\hand-next.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\BoxArchitettura.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\arrow.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\hand-scroll.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\BoxArtSelected.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\aneddoti-successivi.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\art_selected.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\BoxSecretSpots.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\help.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\BoxArchitetturaSelected.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\pause.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\italian.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\swipeup.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\architecture_selected.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\range.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\art.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\BoxArt.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\BoxSpotsSelected.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\play.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\blk_range.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\text.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\english.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\architecture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Milan\css\fonts\" />
+  </ItemGroup>
+  <Import Project="..\Adeon\Adeon.projitems" Label="Shared" Condition="Exists('..\Adeon\Adeon.projitems')" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>
