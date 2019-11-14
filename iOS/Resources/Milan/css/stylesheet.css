@@ -42,6 +42,7 @@ body{
     background-color: none;
     background-image: none;
     background: none !important;
+    height:100vh !important;
 }
 
 /* TITOLI IN POPPINS BOLD E SEMIBOLD */
@@ -108,7 +109,7 @@ p{
 .box{
     position:fixed;
     bottom:-100%;
-    height: 15%;
+    height: 15vh;
     width: 100%;
     background: rgba(25,0,4,.85);
     display: block;
@@ -153,7 +154,7 @@ p{
     background-image: none !important;
     background: none !important;
     border: 0px solid #aaa !important;
-    padding-bottom: 30px !important;
+    padding-bottom: 50px !important;
     padding-left: 0;
 }
 
@@ -171,7 +172,7 @@ p{
     border-radius: 10px;
 }
 
-#welcome-popup, #error-popup{
+#welcome-popup{
     padding: 7%;
 }
 
@@ -180,7 +181,11 @@ p{
 }
 
 #range-popup{
-    padding: 3%;
+    padding: 3% 3% 4% 3%;
+}
+
+#error-popup{
+    padding: 7% 5% 7% 5%;
 }
 
 .select-category{
@@ -207,12 +212,22 @@ p{
     float: left;
 }
 
-#arrow{
-    position:absolute;
-    bottom: 100px;
-    margin:0;
-    height: 100px;
-    width: 100px;
+#hand-choose{
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    /*margin: auto;*/
+    top: 0;
+    left: 8.33%;
+    right: 0;
+    bottom: 0;
+}
+
+.hand-bottom{
+    position: absolute;
+    width: 100%;
+    bottom: 23vh;
+    z-index:1; /*DA IMPLEMENTARE FUNZIONE PER RENDERE BOX z-index=0 e poi farlo tornare auto*/
 }
 
 #error-button{
@@ -230,8 +245,21 @@ p{
     background-color: transparent;
 }
 
+/* ANEDDOTI */
+.box-aneddoti{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Yep! */
+    height: 80%;
+    width: 85%;
+    text-align: center;
+    box-sizing:border-box;
+}
+
 /* SLIDER */
 /* Hide the number input */
+
 .full-width-slider input {
     display: none;
 }

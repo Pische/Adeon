@@ -179,13 +179,6 @@
     <BundleResource Include="Resources\Milan\css\fonts\Montserrat-Medium.ttf" />
     <BundleResource Include="Resources\Milan\css\fonts\Poppins-SemiBold.ttf" />
     <BundleResource Include="Resources\Milan\assets\.DS_Store" />
-    <BundleResource Include="Resources\Milan\assets\box\.DS_Store" />
-    <BundleResource Include="Resources\Milan\assets\box\BoxArchitettura.png" />
-    <BundleResource Include="Resources\Milan\assets\box\BoxArtSelected.png" />
-    <BundleResource Include="Resources\Milan\assets\box\BoxSecretSpots.png" />
-    <BundleResource Include="Resources\Milan\assets\box\BoxArchitetturaSelected.png" />
-    <BundleResource Include="Resources\Milan\assets\box\BoxArt.png" />
-    <BundleResource Include="Resources\Milan\assets\box\BoxSpotsSelected.png" />
     <BundleResource Include="Resources\Milan\css\fonts\Poppins-Bold.ttf" />
     <BundleResource Include="Resources\Milan\assets\icons\hand-close.png" />
     <BundleResource Include="Resources\Milan\assets\icons\spots.png" />
@@ -216,9 +209,24 @@
     <BundleResource Include="Resources\Milan\assets\icons\architecture.png" />
     <BundleResource Include="Resources\Milan\css\fonts\Montserrat-SemiBold.ttf" />
     <BundleResource Include="Resources\Milan\css\fonts\Montserrat-Bold.ttf" />
+    <BundleResource Include="Resources\Milan\assets\icons\hand-choose.png" />
+    <BundleResource Include="Resources\Milan\assets\POI\1_Duomo\.DS_Store" />
+    <BundleResource Include="Resources\Milan\assets\POI\1_Duomo\img\.DS_Store" />
+    <BundleResource Include="Resources\Milan\assets\POI\1_Duomo\img\1.png" />
+    <BundleResource Include="Resources\Milan\assets\POI\1_Duomo\txt\1.txt" />
+    <BundleResource Include="Resources\Milan\assets\box\.DS_Store" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxArchitettura.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxArchitetturaSelected.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxArt.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxArtSelected.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxSecretSpots.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxSpotsSelected.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Milan\css\fonts\" />
+    <Folder Include="Resources\Milan\assets\POI\" />
+    <Folder Include="Resources\Milan\assets\POI\1_Duomo\" />
+    <Folder Include="Resources\Milan\assets\box\" />
   </ItemGroup>
   <Import Project="..\Adeon\Adeon.projitems" Label="Shared" Condition="Exists('..\Adeon\Adeon.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

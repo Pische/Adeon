@@ -34,7 +34,7 @@
     <script type="text/javascript" src="js/WorldLogic.js"></script>
 </head>
 <body>
-    <div data-role="page" style="background: none;">
+    <div data-role="page" style="background: none; height: 100vh !important;">
         <!-- MAIN PAGE CONTENT -->
         <div role="main" class="ui-content">
             <!-- Main Icons -->
@@ -80,13 +80,17 @@
         <!-- RANGE BOX -->
         <div class="box" id="range-box">
             <!--  SLIDER -->
-            <label id="label-1">1km</label>
-            <form class="full-width-slider">
+            <div class="full-width-slider">
                 <input type="range" name="slider-12" id="slider-12" min="1" max="3" value="3" step="0.1"
                         data-show-value="true">
-            </form>
-            <label id="label-2">3km</label>
+            </div>
         </div>
+
+        <!-- FRECCIA TUTORIAL WELCOME -->
+        <div class="hand-bottom" id="hand-choose-container">
+            <img src="assets/icons/hand-choose.png" id="hand-choose">
+        </div>
+
         <!-- BOX DI BENVENUTO -->
         <div class="popup" id="welcome-popup">
             <h1>CIAO!</h1>
@@ -125,15 +129,21 @@
             <h1>SCEGLI LA DISTANZA</h1>
             <p>Imposta il raggio di azione da 1 a 3 km.<br>Successivamente potrai modificarlo</p>
         </div>
-
-        <!-- FRECCIA TUTORIAL -->
-        <img src="assets/icons/arrow.png" id="hand">
+        
 
         <!-- BOX ERRORE RANGE -->
         <div class="popup" id="error-popup">
             <h1>ATTENZIONE</h1>
             <p>Non ci sono luoghi disponibili! Il range che hai selezionato è troppo piccolo!<br>Prova ad <b>aumentare</b> il raggio di azione</p>
             <button type="button" id="error-button"><p><b>OK</b></p></button>
+        </div>
+
+        <!-- BOX ANEDDOTI -->
+        <div class="box-aneddoti">
+            <img id="img-aneddoti" src=""/>
+            <div class="text-aneddoti" id="text-aneddoti">
+
+            </div>
         </div>
     </div>
 </body>

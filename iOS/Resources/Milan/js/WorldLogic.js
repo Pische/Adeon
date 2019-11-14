@@ -222,7 +222,7 @@ var World = {
 
         if (World.firstTime == true) {
             $("#range-popup").fadeOut(600);
-            $("#footer").fadeIn(600);
+            $("#footer").show();
             $("#swipeup").fadeIn(600);
             $("#range").fadeIn(600);
             $("#settings").fadeIn(600);
@@ -320,9 +320,16 @@ var World = {
 
             $("#welcome-popup").click(function () {
                 $("#welcome-popup").fadeOut(600);
-                //$("#footer").fadeOut(600);
                 $("#swipe-box").animate({ 'bottom': '0' }, 600);
                 $("#category-popup").fadeIn(600);
+
+                $("#hand-choose").removeAttr('style'); //reset css property
+                $("#hand-choose").fadeIn(600);
+                $("#hand-choose").animate({
+                    left: '+=65%'
+                }, 2400, function () {
+                        $("#hand-choose").fadeOut(600);
+                    });
             });
         }
 
@@ -354,6 +361,20 @@ var World = {
         if (World.firstTime == true) {
             $("#category-popup").fadeOut(600);
             $("#range-popup").fadeIn(600);
+
+            $("#hand-choose").css("left","10%");
+            $("#hand-choose").fadeIn(600);
+            $("#hand-choose").animate({
+                left: "+=60%"
+            }, 2400,
+                function () {
+                    $("#hand-choose").animate({
+                        left: "-=60%"
+                    }, 2400, function () {
+                            $("#hand-choose").fadeOut(600);
+                        });
+                    
+            });
         }
     },
 
@@ -388,12 +409,16 @@ $(document).ready(function () {
 
     /* WELCOME PAGE */
 
+    /* Carico immagine aneddoto */
+    $("#img-aneddoti").attr("src", "assets/POI/1_Duomo/img/1.png");
+    $("#img-aneddoti").css({ "height": "auto", "width": "100%" });
+
     /* Nascondo finestre popup */
     $("#welcome-popup").hide();
     $("#category-popup").hide();
     $("#range-popup").hide();
     $("#error-popup").hide();
-    $("#hand").hide(); //ancora da inserire
+    $("#hand-choose").hide();
 
     /* Nascondo le main icons*/
     $("#range").hide();
