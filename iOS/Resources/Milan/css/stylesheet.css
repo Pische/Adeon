@@ -255,7 +255,49 @@ p{
     width: 85%;
     text-align: center;
     box-sizing:border-box;
+    vertical-align: middle;
 }
+
+.inner-box-aneddoti{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Yep! */
+    height: auto;
+    width: 100%;
+}
+
+#img-aneddoto{
+    height: auto;
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+#box-txt-aneddoti{
+    height: 25vh;
+    width: 100%;
+    text-align: center;
+    box-sizing:border-box;
+    background: rgba(25,0,4,.85);
+    border-radius: 10px;
+    padding: 2%;
+}
+
+#box-txt-inner{
+    overflow: scroll !important;
+    width: 90%;
+    height: 50%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#aneddoto-play{
+    height: auto;
+    width: 20%;
+    margin: 0 0 2% 0;
+}
+
+
 
 /* SLIDER */
 /* Hide the number input */

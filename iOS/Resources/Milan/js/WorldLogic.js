@@ -15,6 +15,7 @@ var World = {
 
     /*  Ultimo marker selezionato. */
     currentMarker: null,
+    currentAneddoto: null,
 
     /*  True se è la prima volta che avvia l'app */
     firstTime: true,
@@ -81,8 +82,6 @@ var World = {
                     "longitude": parseFloat(poiData[currentPlaceNr].longitude),
                     "altitude": parseFloat(poiData[currentPlaceNr].altitude),
                     "title": poiData[currentPlaceNr].name,
-                    "description": poiData[currentPlaceNr].description,
-                    "url": poiData[currentPlaceNr].src
                 };
 
                 World.markerList.push(new Marker(singlePoi));
@@ -166,15 +165,50 @@ var World = {
     /* Fired when user pressed maker in cam. */
     onMarkerSelected: function onMarkerSelectedFn(marker) {
         World.currentMarker = marker;
+        $("#footer").fadeOut(600);
+        /*  Salvo il titolo del luogo trasformandolo in CamelCase per poterlo
+         *  poi usare per cercare la giusta cartella contenente i dati
+            
+            (\w+)(?:\s+|$) mean at least of one character that build word
+            followed by any number of spaces `\s+` or end of the string `$`
+            capture the word as group and spaces will not create group `?:`
+        */
+        var MarkerTitle = marker.poiData.title.replace(/(\w+)(?:\s+|$)/g, function (_, word) {
+            // uppercase first letter and add rest unchanged
+            return word.charAt(0).toUpperCase() + word.substr(1);
+        });
+        
+        /* Carico immagine e testo dell'aneddoto */
+        for (var i = 0; i < DB_Aneddoti.length; i++) {
+            if (DB_Aneddoti[i].DB_Milan == marker.poiData.id) {
+                World.currentAneddoto = DB_Aneddoti[i].id;
+                $("#img-aneddoto").attr("src", DB_Aneddoti[i].img);
+                $("#txt-aneddoto").html(DB_Aneddoti[i].txt);
+                var audio = new AR.Sound("/assets/POI/Duomo/audio/Duomo1.mp3", {
+                //var audio = new AR.Sound("https://pische.altervista.org/wp-content/uploads/2019/11/Duomo1.mp3", {
+                    onLoaded: function () {
+                        alert("CARICATO!");
+                    },
+                    onError: function () {
+                        alert("ERRORE!");
+                    },
+                });
+                $("#aneddoto-play").click(function () {
+                    audio.play();
+                    $("#aneddoto-play").attr("src", "assets/icons/pause.png");
+                });
+            }
+        }
+
+        /* Mostro box aneddoti*/
+        $("#box-aneddoti").fadeIn(600);
 
         /*
             In this sample a POI detail panel appears when pressing a cam-marker (the blue box with title &
             description), compare index.html in the sample's directory.
         */
         /* Update panel values. */
-        $("#poi-detail-title").html(marker.poiData.title);
-        $("#poi-detail-description").html(marker.poiData.description);
-
+        $("#poi-detail-title").html(MarkerTitle);
 
         /*
             It's ok for AR.Location subclass objects to return a distance of `undefined`. In case such a distance
@@ -192,8 +226,6 @@ var World = {
         var distanceToUserValue = (marker.distanceToUser > 999) ?
             ((marker.distanceToUser / 1000).toFixed(2) + " km") :
             (Math.round(marker.distanceToUser) + " m");
-
-        $("#poi-detail-distance").html(distanceToUserValue);
 
         /* Show panel. */
         $("#panel-poidetail").panel("open", 123);
@@ -231,7 +263,7 @@ var World = {
             World.firstTime = false;
         }
         $("#swipeup").fadeIn(600);
-        $('#range-box').animate({ 'bottom': '-140px' }, 300);
+        $('#range-box').animate({ 'bottom': '-15vh' }, 300);
 
         /* Salvo il valore dello slider (1.0 - 3.0)*/
         var slider_value = $("#slider-12").val();
@@ -289,7 +321,7 @@ var World = {
 
     /* Request POI data. */
     requestDataFromLocal: function requestDataFromLocalFn(lat, lon) {
-        World.loadPoisFromJsonData(myJsonData);
+        World.loadPoisFromJsonData(DB_Milan);
     },
 
     /*  Funzione di appoggio per ordinare i posti in base alla distanza*/
@@ -379,7 +411,7 @@ var World = {
     },
 
     closeCategory: function closeCategoryFn() {
-        $('#swipe-box').animate({ 'bottom': '-140px' }, 600);
+        $('#swipe-box').animate({ 'bottom': '-15vh' }, 600);
         World.showRange();
     },
 
@@ -409,10 +441,6 @@ $(document).ready(function () {
 
     /* WELCOME PAGE */
 
-    /* Carico immagine aneddoto */
-    $("#img-aneddoti").attr("src", "assets/POI/1_Duomo/img/1.png");
-    $("#img-aneddoti").css({ "height": "auto", "width": "100%" });
-
     /* Nascondo finestre popup */
     $("#welcome-popup").hide();
     $("#category-popup").hide();
@@ -426,6 +454,9 @@ $(document).ready(function () {
     $("#help").hide();
     $("#footer").hide();
 
+    /* Nascondo box aneddoti */
+    $("#box-aneddoti").hide();
+
     World.welcomeToAdeon();
 
     /* Funzioni di swipe up e swipe down dei pannelli */
@@ -436,14 +467,14 @@ $(document).ready(function () {
 
     $('#swipe-box').on('swipedown', function () {
         if (!World.firstTime) {
-            $('#swipe-box').animate({ 'bottom': '-140px' }, 500);
+            $('#swipe-box').animate({ 'bottom': '-15vh' }, 500);
             $("#swipeup").show();
         }
     });
     
     $('#range-box').on('swipedown', function () {
         if (!World.firstTime) {
-            $('#range-box').animate({ 'bottom': '-140px' }, 300);
+            $('#range-box').animate({ 'bottom': '-15vh' }, 300);
             $("#swipeup").show();
         }
     });

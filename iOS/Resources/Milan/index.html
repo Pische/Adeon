@@ -12,7 +12,8 @@
     <script src="../ade.js"></script>
 
     <!-- important for static POI loading - include the static data  -->
-    <script type="text/javascript" src="js/myjsondata.js"></script>
+    <script type="text/javascript" src="js/DB_Milan.js"></script>
+    <script type="text/javascript" src="js/DB_Aneddoti.js"></script>
 
     <!-- jquery mobile CSS -->
     <link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css" />
@@ -139,10 +140,20 @@
         </div>
 
         <!-- BOX ANEDDOTI -->
-        <div class="box-aneddoti">
-            <img id="img-aneddoti" src=""/>
-            <div class="text-aneddoti" id="text-aneddoti">
+        <div class="box-aneddoti" id="box-aneddoti">
+            <div class="inner-box-aneddoti">
+                <!-- IMMAGINE ANEDDOTO -->
+                <img id="img-aneddoto" src=""/>
 
+                <!-- TESTO ANEDDOTO -->
+                <div class="box-txt-aneddoti" id="box-txt-aneddoti">
+                    <!-- PLAY -->
+                    <img src="assets/icons/play.png" id="aneddoto-play">
+                    <!-- TXT -->
+                    <div id="box-txt-inner">
+                        <p id="txt-aneddoto"></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
