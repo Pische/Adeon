@@ -1,4 +1,8 @@
-﻿var DB_Milan = [
+﻿/*
+ *  Chiave primaria: id
+*/
+
+var DB_Milan = [
     {
         "id": "1",
         "longitude": 9.238569,

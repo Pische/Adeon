@@ -208,24 +208,6 @@ p{
     float: left;
 }
 
-#hand-choose{
-    height: 60px;
-    width: 60px;
-    position: absolute;
-    /*margin: auto;*/
-    top: 0;
-    left: 8.33%;
-    right: 0;
-    bottom: 0;
-}
-
-.hand-bottom{
-    position: absolute;
-    width: 100%;
-    bottom: 23vh;
-    z-index:1; /*DA IMPLEMENTARE FUNZIONE PER RENDERE BOX z-index=0 e poi farlo tornare auto*/
-}
-
 #error-button{
     background-color: #720026;
     border: 2px solid #720026;
@@ -258,7 +240,7 @@ p{
     position: absolute;
     top: 55%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -45%);
     height: auto;
     width: 100%;
 }
@@ -298,7 +280,40 @@ p{
     margin: 0 0 5% 0;
 }
 
+/* MANI TUTORIAL */
 
+.hand{
+    height: 60px;
+    width: 60px;
+    position: absolute;
+}
+
+#hand-choose{
+    top: 0;
+    left: 8.33%;
+    right: 0;
+    bottom: 0;
+}
+
+.hand-bottom{
+    position: absolute;
+    width: 100%;
+    bottom: 23vh;
+}
+
+#hand-close{
+    transform: translateX(-50%);
+    top: 0;
+    left: 50%;
+    margin: 0;
+}
+
+#hand-next{
+    transform: translateY(-25%);
+    top: 25%;
+    right: 0;
+    margin: 0;
+}
 
 /* SLIDER */
 

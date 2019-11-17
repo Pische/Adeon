@@ -118,7 +118,6 @@
   <ItemGroup>
     <BundleResource Include="Resources\ade.js" />
     <BundleResource Include="Resources\Milan\index.html" />
-    <BundleResource Include="Resources\Milan\js\myjsondata.js" />
     <BundleResource Include="Resources\Milan\js\WorldLogic.js" />
     <BundleResource Include="Resources\Milan\js\marker.js" />
     <BundleResource Include="Resources\Milan\jquery\jquery.mobile-1.4.5.min.js" />
@@ -182,6 +181,8 @@
     <BundleResource Include="Resources\Milan\assets\POI\img\Duomo_2.png" />
     <BundleResource Include="Resources\Milan\assets\POI\img\Duomo_1.png" />
     <BundleResource Include="Resources\Milan\assets\POI\audio\Duomo1.mp3" />
+    <BundleResource Include="Resources\Milan\assets\icons\close.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\hand-next2.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Milan\css\fonts\" />
