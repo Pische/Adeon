@@ -166,49 +166,11 @@ var World = {
     onMarkerSelected: function onMarkerSelectedFn(marker) {
         World.currentMarker = marker;
         $("#footer").fadeOut(600);
-        /*  Salvo il titolo del luogo trasformandolo in CamelCase per poterlo
-         *  poi usare per cercare la giusta cartella contenente i dati
-            
-            (\w+)(?:\s+|$) mean at least of one character that build word
-            followed by any number of spaces `\s+` or end of the string `$`
-            capture the word as group and spaces will not create group `?:`
-        */
-        var MarkerTitle = marker.poiData.title.replace(/(\w+)(?:\s+|$)/g, function (_, word) {
-            // uppercase first letter and add rest unchanged
-            return word.charAt(0).toUpperCase() + word.substr(1);
-        });
-        
-        /* Carico immagine e testo dell'aneddoto */
-        for (var i = 0; i < DB_Aneddoti.length; i++) {
-            if (DB_Aneddoti[i].DB_Milan == marker.poiData.id) {
-                World.currentAneddoto = DB_Aneddoti[i].id;
-                $("#img-aneddoto").attr("src", DB_Aneddoti[i].img);
-                $("#txt-aneddoto").html(DB_Aneddoti[i].txt);
-                var audio = new AR.Sound("/assets/POI/Duomo/audio/Duomo1.mp3", {
-                //var audio = new AR.Sound("https://pische.altervista.org/wp-content/uploads/2019/11/Duomo1.mp3", {
-                    onLoaded: function () {
-                        alert("CARICATO!");
-                    },
-                    onError: function () {
-                        alert("ERRORE!");
-                    },
-                });
-                $("#aneddoto-play").click(function () {
-                    audio.play();
-                    $("#aneddoto-play").attr("src", "assets/icons/pause.png");
-                });
-            }
-        }
+
+        World.showAneddoto();
 
         /* Mostro box aneddoti*/
         $("#box-aneddoti").fadeIn(600);
-
-        /*
-            In this sample a POI detail panel appears when pressing a cam-marker (the blue box with title &
-            description), compare index.html in the sample's directory.
-        */
-        /* Update panel values. */
-        $("#poi-detail-title").html(MarkerTitle);
 
         /*
             It's ok for AR.Location subclass objects to return a distance of `undefined`. In case such a distance
@@ -227,15 +189,68 @@ var World = {
             ((marker.distanceToUser / 1000).toFixed(2) + " km") :
             (Math.round(marker.distanceToUser) + " m");
 
-        /* Show panel. */
-        $("#panel-poidetail").panel("open", 123);
-
-        $(".ui-panel-dismiss").unbind("mousedown");
-
         /* Deselect AR-marker when user exits detail screen div. */
         $("#panel-poidetail").on("panelbeforeclose", function (event, ui) {
-            World.currentMarker.setDeselected(World.currentMarker);
+            
         });
+    },
+
+    showAneddoto: function showAneddotoFn() {
+        var i = 0;
+        var exit = false;
+
+        while (i < DB_Aneddoti.length && exit == false) {
+            /*
+                Se l'aneddoto appartiene al Marker selezionato ed è diverso
+                dall'aneddoto visualizzato, mostro aneddoto
+            */
+            if (DB_Aneddoti[i].DB_Milan == World.currentMarker.poiData.id &&
+                DB_Aneddoti[i].id != World.currentAneddoto) {
+                exit = true;
+                World.currentAneddoto = DB_Aneddoti[i].id; //salvo id aneddoto 
+                $("#img-aneddoto").attr("src", DB_Aneddoti[i].img);
+                $("#txt-aneddoto").html(DB_Aneddoti[i].txt);
+
+                $("#aneddoto-pause").hide();
+                /*  Carico audio */
+                var audio = new AR.Sound(DB_Aneddoti[i].audio, {
+                    onLoaded: function () {
+                        /* Aggiungo listener al pulsante play/pausa */
+                        $("#aneddoto-play, #aneddoto-pause").click(function () {
+                            /*
+                                Se c'era un audio in riproduzione, riprendo da
+                                dove era arrivato
+                            */
+                            if (audio.state == AR.CONST.STATE.PAUSED) {
+                                audio.resume();
+                                $("#aneddoto-play").hide();
+                                $("#aneddoto-pause").show();
+                            }
+                            else if (audio.state != AR.CONST.STATE.PLAYING) {
+                                audio.play();
+                                $("#aneddoto-play").hide();
+                                $("#aneddoto-pause").show();
+                            }
+                            else if (audio.state == AR.CONST.STATE.PLAYING) {
+                                audio.pause();
+                                $("#aneddoto-pause").hide();
+                                $("#aneddoto-play").show();
+                            }
+                        });
+                    },
+                    onFinishedPlaying: function () {
+                        $("#aneddoto-pause").hide();
+                        $("#aneddoto-play").show();
+                    },
+                    onError: function () {
+                        alert("ERRORE!");
+                    },
+                }); //end new AR.Sound
+                
+                audio.load();
+            }
+            i++;
+        }
     },
 
     /* Screen was clicked but no geo-object was hit. */
@@ -355,13 +370,15 @@ var World = {
                 $("#swipe-box").animate({ 'bottom': '0' }, 600);
                 $("#category-popup").fadeIn(600);
 
-                $("#hand-choose").removeAttr('style'); //reset css property
+                /* Animazione mano */
                 $("#hand-choose").fadeIn(600);
                 $("#hand-choose").animate({
                     left: '+=65%'
                 }, 2400, function () {
                         $("#hand-choose").fadeOut(600);
                     });
+
+                $("#hand-choose").removeAttr('style');
             });
         }
 
@@ -394,7 +411,9 @@ var World = {
             $("#category-popup").fadeOut(600);
             $("#range-popup").fadeIn(600);
 
-            $("#hand-choose").css("left","10%");
+
+            /* Animazione mano */
+            $("#hand-choose").css("left", "10%");
             $("#hand-choose").fadeIn(600);
             $("#hand-choose").animate({
                 left: "+=60%"
@@ -403,10 +422,10 @@ var World = {
                     $("#hand-choose").animate({
                         left: "-=60%"
                     }, 2400, function () {
-                            $("#hand-choose").fadeOut(600);
-                        });
-                    
-            });
+                        $("#hand-choose").fadeOut(600);
+                    });
+
+                });
         }
     },
 
@@ -459,26 +478,45 @@ $(document).ready(function () {
 
     World.welcomeToAdeon();
 
-    /* Funzioni di swipe up e swipe down dei pannelli */
+/* Funzioni di swipe up e swipe down dei pannelli */
+
+    /* CATEGORIE */
     $('#footer').on('swipeup', function () {
-        $('#swipe-box').animate({ 'bottom': '0' }, 500);
+        $('#swipe-box').animate({'bottom': '0'}, 600);
         $("#swipeup").hide();
     });
 
     $('#swipe-box').on('swipedown', function () {
         if (!World.firstTime) {
-            $('#swipe-box').animate({ 'bottom': '-15vh' }, 500);
-            $("#swipeup").show();
-        }
-    });
-    
-    $('#range-box').on('swipedown', function () {
-        if (!World.firstTime) {
-            $('#range-box').animate({ 'bottom': '-15vh' }, 300);
+            $('#swipe-box').animate({'bottom': '-15vh'}, 600);
             $("#swipeup").show();
         }
     });
 
+    /* RANGE */
+    $('#range-box').on('swipedown', function () {
+        if (!World.firstTime) {
+            $('#range-box').animate({'bottom': '-15vh'}, 600);
+            $("#swipeup").show();
+        }
+    });
+
+    /* PANNELLO DETTAGLI */
+    $('#img-aneddoto').on('swipedown', function () {
+        World.currentMarker.setDeselected(World.currentMarker);
+        World.currentAneddoto = null;
+        $("#box-aneddoti").hide(600);
+    });
+
+    $('#img-aneddoto').on('swipedown', function () {
+        World.currentMarker.setDeselected(World.currentMarker);
+        World.currentAneddoto = null;
+        $("#box-aneddoti").hide(600);
+    });
+
+    $('#img-aneddoto').on('swipeleft', function () {
+        World.showAneddoto();
+    });
 
     /* Aggiorna il valore del range quando lo slider viene aggiornato*/
     $("#slider-12").on("slidestop", function (e) {

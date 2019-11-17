@@ -30,10 +30,6 @@
   font-weight: 700;
 }
 
-/* fixes focus scrolling*/
-html .ui-page-active {
-    overflow: hidden !important;
-}
 
 body{
     border: none;
@@ -250,7 +246,7 @@ p{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Yep! */
+    transform: translate(-50%, -50%);
     height: 80%;
     width: 85%;
     text-align: center;
@@ -262,7 +258,7 @@ p{
     position: absolute;
     top: 55%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Yep! */
+    transform: translate(-50%, -50%);
     height: auto;
     width: 100%;
 }
@@ -280,28 +276,33 @@ p{
     box-sizing:border-box;
     background: rgba(25,0,4,.85);
     border-radius: 10px;
-    padding: 2%;
+    padding: 3%;
 }
 
 #box-txt-inner{
-    overflow: scroll !important;
+    overflow: scroll;
     width: 90%;
-    height: 50%;
+    height: 40%;
     text-align: center;
     margin: 0 auto;
 }
 
-#aneddoto-play{
+#box-txt-inner::-webkit-scrollbar {
+    display: none;
+}
+
+
+#aneddoto-play, #aneddoto-pause{
     height: auto;
-    width: 20%;
-    margin: 0 0 2% 0;
+    width: 15%;
+    margin: 0 0 5% 0;
 }
 
 
 
 /* SLIDER */
-/* Hide the number input */
 
+/* Hide the number input */
 .full-width-slider input {
     display: none;
 }
@@ -315,14 +316,11 @@ p{
     text-align: center;
 }
 
-#label-1{
-     left: 8.33%;
+/* fixes focus scrolling*/
+html .ui-page-active {
+    overflow: hidden !important;
 }
 
-
-#label-2{
-    right: 8.33%;
-}
 
 /* SLIDER RANGE 
 .box .ui-slider-track {

@@ -117,49 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ade.js" />
-    <BundleResource Include="Resources\POI %28NEW%29\index.html" />
-    <BundleResource Include="Resources\POI %28NEW%29\.DS_Store" />
-    <BundleResource Include="Resources\POI %28NEW%29\css\poi-radar.css" />
-    <BundleResource Include="Resources\POI %28NEW%29\js\radar.js" />
-    <BundleResource Include="Resources\POI %28NEW%29\js\myjsondata.js" />
-    <BundleResource Include="Resources\POI %28NEW%29\js\WorldLogic.js" />
-    <BundleResource Include="Resources\POI %28NEW%29\js\marker.js" />
-    <BundleResource Include="Resources\POI %28NEW%29\jquery\jquery.mobile-1.4.5.min.js" />
-    <BundleResource Include="Resources\POI %28NEW%29\jquery\.DS_Store" />
-    <BundleResource Include="Resources\POI %28NEW%29\jquery\jquery.mobile-1.4.5.min.css" />
-    <BundleResource Include="Resources\POI %28NEW%29\jquery\jquery-1.9.1.min.js" />
-    <BundleResource Include="Resources\POI %28NEW%29\jquery\stylesheet.css" />
-    <BundleResource Include="Resources\POI %28NEW%29\jquery\images\ajax-loader.gif" />
-    <BundleResource Include="Resources\POI %28NEW%29\jquery\images\icons-18-black.png" />
-    <BundleResource Include="Resources\POI %28NEW%29\jquery\images\icons-36-white.png" />
-    <BundleResource Include="Resources\POI %28NEW%29\jquery\images\icons-18-white.png" />
-    <BundleResource Include="Resources\POI %28NEW%29\jquery\images\icons-36-black.png" />
-    <BundleResource Include="Resources\POI %28NEW%29\assets\radar_bg.png" />
-    <BundleResource Include="Resources\POI %28NEW%29\assets\marker_selected.png" />
-    <BundleResource Include="Resources\POI %28NEW%29\assets\radar_north.png" />
-    <BundleResource Include="Resources\POI %28NEW%29\assets\marker_idle.png" />
-    <BundleResource Include="Resources\POI %28NEW%29\assets\indi.png" />
-    <BundleResource Include="Resources\POI\index.html" />
-    <BundleResource Include="Resources\POI\.DS_Store" />
-    <BundleResource Include="Resources\POI\css\poi-radar.css" />
-    <BundleResource Include="Resources\POI\js\radar.js" />
-    <BundleResource Include="Resources\POI\js\myjsondata.js" />
-    <BundleResource Include="Resources\POI\js\WorldLogic.js" />
-    <BundleResource Include="Resources\POI\js\marker.js" />
-    <BundleResource Include="Resources\POI\jquery\jquery-1.9.1.min.js" />
-    <BundleResource Include="Resources\POI\jquery\jquery-mobile-transparent-ui-overlay.css" />
-    <BundleResource Include="Resources\POI\jquery\jquery.mobile-1.3.2.min.css" />
-    <BundleResource Include="Resources\POI\jquery\jquery.mobile-1.3.2.min.js" />
-    <BundleResource Include="Resources\POI\jquery\images\ajax-loader.gif" />
-    <BundleResource Include="Resources\POI\jquery\images\icons-18-black.png" />
-    <BundleResource Include="Resources\POI\jquery\images\icons-36-white.png" />
-    <BundleResource Include="Resources\POI\jquery\images\icons-18-white.png" />
-    <BundleResource Include="Resources\POI\jquery\images\icons-36-black.png" />
-    <BundleResource Include="Resources\POI\assets\radar_bg.png" />
-    <BundleResource Include="Resources\POI\assets\marker_selected.png" />
-    <BundleResource Include="Resources\POI\assets\radar_north.png" />
-    <BundleResource Include="Resources\POI\assets\marker_idle.png" />
-    <BundleResource Include="Resources\POI\assets\indi.png" />
     <BundleResource Include="Resources\Milan\index.html" />
     <BundleResource Include="Resources\Milan\js\myjsondata.js" />
     <BundleResource Include="Resources\Milan\js\WorldLogic.js" />
@@ -201,7 +158,6 @@
     <BundleResource Include="Resources\Milan\assets\icons\art.png" />
     <BundleResource Include="Resources\Milan\assets\icons\BoxArt.png" />
     <BundleResource Include="Resources\Milan\assets\icons\BoxSpotsSelected.png" />
-    <BundleResource Include="Resources\Milan\assets\icons\play.png" />
     <BundleResource Include="Resources\Milan\assets\icons\blk_range.png" />
     <BundleResource Include="Resources\Milan\assets\icons\text.png" />
     <BundleResource Include="Resources\Milan\assets\icons\english.png" />
@@ -209,10 +165,6 @@
     <BundleResource Include="Resources\Milan\css\fonts\Montserrat-SemiBold.ttf" />
     <BundleResource Include="Resources\Milan\css\fonts\Montserrat-Bold.ttf" />
     <BundleResource Include="Resources\Milan\assets\icons\hand-choose.png" />
-    <BundleResource Include="Resources\Milan\assets\POI\Duomo\.DS_Store" />
-    <BundleResource Include="Resources\Milan\assets\POI\Duomo\img\.DS_Store" />
-    <BundleResource Include="Resources\Milan\assets\POI\Duomo\img\1.png" />
-    <BundleResource Include="Resources\Milan\assets\POI\Duomo\txt\1.txt" />
     <BundleResource Include="Resources\Milan\assets\box\.DS_Store" />
     <BundleResource Include="Resources\Milan\assets\box\BoxArchitettura.png" />
     <BundleResource Include="Resources\Milan\assets\box\BoxArchitetturaSelected.png" />
@@ -220,19 +172,20 @@
     <BundleResource Include="Resources\Milan\assets\box\BoxArtSelected.png" />
     <BundleResource Include="Resources\Milan\assets\box\BoxSecretSpots.png" />
     <BundleResource Include="Resources\Milan\assets\box\BoxSpotsSelected.png" />
-    <BundleResource Include="Resources\Milan\assets\POI\Duomo\img\2.png" />
     <BundleResource Include="Resources\Milan\js\DB_Aneddoti.js" />
     <BundleResource Include="Resources\Milan\js\DB_Milan.js" />
     <BundleResource Include="Resources\Milan\js\1.txt" />
-    <BundleResource Include="Resources\Milan\assets\POI\Duomo\audio\Duomo1.mp3" />
     <BundleResource Include="Resources\Milan\assets\icons\pause.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\play.png" />
+    <BundleResource Include="Resources\Milan\assets\POI\.DS_Store" />
+    <BundleResource Include="Resources\Milan\assets\POI\img\.DS_Store" />
+    <BundleResource Include="Resources\Milan\assets\POI\img\Duomo_2.png" />
+    <BundleResource Include="Resources\Milan\assets\POI\img\Duomo_1.png" />
+    <BundleResource Include="Resources\Milan\assets\POI\audio\Duomo1.mp3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Milan\css\fonts\" />
-    <Folder Include="Resources\Milan\assets\POI\" />
-    <Folder Include="Resources\Milan\assets\POI\Duomo\" />
     <Folder Include="Resources\Milan\assets\box\" />
-    <Folder Include="Resources\Milan\assets\POI\Duomo\audio\" />
   </ItemGroup>
   <Import Project="..\Adeon\Adeon.projitems" Label="Shared" Condition="Exists('..\Adeon\Adeon.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
