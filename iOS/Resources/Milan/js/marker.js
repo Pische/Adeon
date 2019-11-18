@@ -5,44 +5,57 @@ function Marker(poiData) {
 
     this.poiData = poiData;
     this.isSelected = false;
+    this.isScopri = false;
 
     /*
-        With AR.PropertyAnimations you are able to animate almost any property of ARchitect objects. This sample
-        will animate the opacity of both background drawables so that one will fade out while the other one fades
-        in. The scaling is animated too. The marker size changes over time so the labels need to be animated too in
-        order to keep them relative to the background drawable. AR.AnimationGroups are used to synchronize all
-        animations in parallel or sequentially.
+        Con AR.PropertyAnimations sei in grado di animare quasi tutte le
+        proprietà degli oggetti ARchitect. In questo caso animerà l'opacità
+        di entrambi i box dei marker in background in modo che uno svanisca
+        mentre l'altro si dissolve. Anche il ridimensionamento è animato.
+        Le dimensioni del marker cambiano nel tempo, quindi anche le etichette
+        devono essere animate per mantenerle relative al disegno di sfondo.
+        AR.AnimationGroups sono usati per sincronizzare tutte le animazioni in
+        parallelo o in sequenza.
     */
     this.animationGroupIdle = null;
     this.animationGroupSelected = null;
+    this.animationGroupScopri = null;
 
-    /* Create the AR.GeoLocation from the poi data. */
+    /*  Creo AR.GeoLocation dalle coordinate del POI */
     var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude, poiData.altitude);
-    var distance = (markerLocation.distanceToUser() > 999) ?
-        ((markerLocation.distanceToUser() / 1000).toFixed(2) + " km") : (Math.round(markerLocation.distanceToUser()) + " m");
 
-    /* Create an AR.ImageDrawable for the marker in idle state. */
+    /*  Creo un AR.ImageDrawable per il marker in stato "inattivo" */
     this.markerDrawableIdle = new AR.ImageDrawable(World.markerDrawableIdle, 2.5, {
         zOrder: 0,
         opacity: 1.0,
         /*
-            To react on user interaction, an onClick property can be set for each AR.Drawable. The property is a
-            function which will be called each time the user taps on the drawable. The function called on each tap
-            is returned from the following helper function defined in marker.js. The function returns a function
-            which checks the selected state with the help of the variable isSelected and executes the appropriate
-            function. The clicked marker is passed as an argument.
+            Per reagire alle interazioni utente, viene settata la proprietà
+            onClick per ogni AR.Drawable. La proprietà è una funzione che viene
+            chiamata ogni volta che l'utente clicca sul box. La funzione
+            chiamata su ogni tocco viene restituita dalla seguente funzione di
+            supporto definita in marker.js. La funzione restituisce una funzione
+            che controlla lo stato selezionato con l'aiuto della variabile
+            isSelected ed esegue la funzione appropriata.
+            Il marcatore cliccato viene passato come argomento.
         */
         onClick: Marker.prototype.getOnClickTrigger(this)
     });
 
-    /* Create an AR.ImageDrawable for the marker in selected state. */
+    /*  Creo un AR.ImageDrawable per il marker in stato "selezionato" */
     this.markerDrawableSelected = new AR.ImageDrawable(World.markerDrawableSelected, 2.5, {
         zOrder: 0,
         opacity: 0.0,
         onClick: null
     });
 
-    /* Create an AR.Label for the marker's title . */
+    /*
+        Funzione d'appoggio usata per mostrare la giusta unità di misura
+        (m o km) all'interno della label
+    */
+    var distance = (markerLocation.distanceToUser() > 999) ?
+        ((markerLocation.distanceToUser() / 1000).toFixed(2) + " km") : (Math.round(markerLocation.distanceToUser()) + " m");
+
+    /* Creo un AR.Label per il titolo del marker. */
     this.titleLabel = new AR.Label(poiData.title, 0.6, {
         zOrder: 1,
         translate: {
@@ -54,6 +67,7 @@ function Marker(poiData) {
         }
     });
 
+    /* Creo un AR.Label per la distanza mostrata sul marker. */
     this.descriptionLabel = new AR.Label(distance, 0.5, {
         zOrder: 1,
         translate: {
@@ -70,6 +84,8 @@ function Marker(poiData) {
         Create the AR.GeoObject with the drawable objects and define the AR.ImageDrawable as an indicator target on
         the marker AR.GeoObject. The direction indicator is displayed automatically when necessary. AR.Drawable
         subclasses (e.g. AR.Circle) can be used as direction indicators.
+
+        Creo l'AR.GeoObject con gli oggetti disegnabili (box).
     */
     this.markerObject = new AR.GeoObject(markerLocation, {
         drawables: {
@@ -90,10 +106,21 @@ Marker.prototype.getOnClickTrigger = function(marker) {
         the background drawable will be enabled and the standard background disabled. This is done by setting the
         opacity property to 1.0 for the visible state and to 0.0 for an invisible state. Third the onClick function
         is set only for the background drawable of the selected marker.
+
+        Le funzioni setSelected e setDeselected sono funzioni protype del Marker
+
+        Entrambe le funzioni eseguono gli stessi passaggi ma sono invertite,
+        quindi solo una funzione (setSelected) è trattata in dettaglio.
+        Sono necessari tre passaggi per selezionare il marker.
+        Innanzitutto lo stato verrà impostato in modo appropriato. In secondo
+        luogo verrà abilitato il disegno di sfondo e lo sfondo standard
+        disabilitato. Questo viene fatto impostando la proprietà di opacità su
+        1.0 per lo stato visibile e su 0.0 per uno stato invisibile. Terzo, la
+        funzione onClick è impostata solo per il disegno di sfondo del marker
+        selezionato.
     */
 
-    return function() {
-
+    return function () {
         if (!Marker.prototype.isAnyAnimationRunning(marker)) {
             if (marker.isSelected) {
 
@@ -256,6 +283,71 @@ Marker.prototype.setDeselected = function(marker) {
 
     /* Starts the idle-state animation. */
     marker.animationGroupIdle.start();
+};
+
+Marker.setScopri = function (marker) {
+
+    /* New: . */
+    if (marker.animationGroupSelected === null) {
+        marker.isScopri = true;
+
+        var easingCurve = new AR.EasingCurve(AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC, {
+            amplitude: 2.0
+        });
+
+        /* Create AR.PropertyAnimation that animates the opacity to 0.0 in order to hide the idle-state-drawable. */
+        var hideIdleDrawableAnimation = new AR.PropertyAnimation(
+            marker.markerDrawableIdle, "opacity", null, 0.0, changeAnimationDuration);
+        /* Create AR.PropertyAnimation that animates the opacity to 1.0 in order to show the selected-state-drawable. */
+        var showSelectedDrawableAnimation = new AR.PropertyAnimation(
+            marker.markerDrawableScopri, "opacity", null, 1.0, changeAnimationDuration);
+
+        /* Create AR.PropertyAnimation that animates the scaling of the idle-state-drawable to 1.2. */
+        var idleDrawableResizeAnimationX = new AR.PropertyAnimation(
+            marker.markerDrawableIdle, 'scale.x', null, 1.2, resizeAnimationDuration, easingCurve);
+        /* Create AR.PropertyAnimation that animates the scaling of the selected-state-drawable to 1.2. */
+        var selectedDrawableResizeAnimationX = new AR.PropertyAnimation(
+            marker.markerDrawableScopri, 'scale.x', null, 1.2, resizeAnimationDuration, easingCurve);
+        /* Create AR.PropertyAnimation that animates the scaling of the title label to 1.2. */
+        var titleLabelResizeAnimationX = new AR.PropertyAnimation(
+            marker.titleLabel, 'scale.x', null, 1.2, resizeAnimationDuration, easingCurve);
+        /* Create AR.PropertyAnimation that animates the scaling of the description label to 1.2. */
+        var descriptionLabelResizeAnimationX = new AR.PropertyAnimation(
+            marker.descriptionLabel, 'scale.x', null, 1.2, resizeAnimationDuration, easingCurve);
+
+        /* Create AR.PropertyAnimation that animates the scaling of the idle-state-drawable to 1.2. */
+        var idleDrawableResizeAnimationY = new AR.PropertyAnimation(
+            marker.markerDrawableIdle, 'scale.y', null, 1.2, resizeAnimationDuration, easingCurve);
+        /* Create AR.PropertyAnimation that animates the scaling of the selected-state-drawable to 1.2. */
+        var selectedDrawableResizeAnimationY = new AR.PropertyAnimation(
+            marker.markerDrawableScopri, 'scale.y', null, 1.2, resizeAnimationDuration, easingCurve);
+        /* Create AR.PropertyAnimation that animates the scaling of the title label to 1.2. */
+        var titleLabelResizeAnimationY = new AR.PropertyAnimation(
+            marker.titleLabel, 'scale.y', null, 1.2, resizeAnimationDuration, easingCurve);
+        /* Create AR.PropertyAnimation that animates the scaling of the description label to 1.2. */
+        var descriptionLabelResizeAnimationY = new AR.PropertyAnimation(
+            marker.descriptionLabel, 'scale.y', null, 1.2, resizeAnimationDuration, easingCurve);
+
+        /*
+            There are two types of AR.AnimationGroups. Parallel animations are running at the same time,
+            sequentials are played one after another. This example uses a parallel AR.AnimationGroup.
+        */
+        marker.animationGroupScopri = new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [
+            hideIdleDrawableAnimation,
+            showSelectedDrawableAnimation,
+            idleDrawableResizeAnimationX,
+            selectedDrawableResizeAnimationX,
+            titleLabelResizeAnimationX,
+            descriptionLabelResizeAnimationX,
+            idleDrawableResizeAnimationY,
+            selectedDrawableResizeAnimationY,
+            titleLabelResizeAnimationY,
+            descriptionLabelResizeAnimationY
+        ]);
+    }
+
+    /* Starts the selected-state animation. */
+    marker.animationGroupScopri.start();
 };
 
 Marker.prototype.isAnyAnimationRunning = function(marker) {

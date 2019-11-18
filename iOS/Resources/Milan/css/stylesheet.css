@@ -63,7 +63,7 @@ h2{
 }
 
 /* PARAGRAFI IN MONTSERRAT MEDIUM */
-p{
+p, ol li{
     font-family: 'Montserrat', sans-serif !important;
     font-weight: 500 !important;
     font-size: 14px !important;
@@ -86,13 +86,7 @@ p{
     height: 40px !important;
 }
 
-#range{
-    width: 40px !important;
-    height: 45px !important;
-    margin-top: 20px !important;
-}
-
-#settings{
+#range, #settings{
     margin-top: 20px !important;
 }
 
@@ -168,11 +162,11 @@ p{
     border-radius: 10px;
 }
 
-#welcome-popup{
+#welcome-popup, #settings-popup{
     padding: 7%;
 }
 
-#category-popup{
+#category-popup, #help-popup{
     padding: 7% 3% 0 3%;
 }
 
@@ -322,6 +316,68 @@ p{
     margin: 0;
 }
 
+
+/* POPUP SETTINGS */
+
+#l-italiano, #l-english{
+    margin-top: 10%;
+    margin-bottom:10%;
+    width: 20%;
+    height: auto;
+}
+
+#l-italiano{
+    margin-right: 15%;
+    box-shadow: 0px 0px 20px 1px #FFFFFF;
+}
+
+#l-english{
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* msie */
+}
+
+.popup p span {
+    color: #FF7F51;
+}
+
+.close{
+    position: absolute;
+    height: 50px;
+    width: auto;
+    top: 0;
+    right: 0;
+}
+
+/* POPUP HELP */
+.icon-help{
+    margin-top: 2%;
+    height: 40px;
+    width: auto;
+}
+
+.icon-play-text{
+    margin-bottom: 4%;
+    height: 35px;
+    width: auto;
+}
+
+#help-popup{
+    padding: 10% 2% 0 2%;
+}
+
+.help-text{
+    padding: 0 2% 0 2%;
+    text-align:left;
+}
+
+#help-popup h1{
+    font-size: 21px !important;
+}
+
+#image-slider{
+    width: auto;
+    height: 40px;
+}
 /* SLIDER */
 
 /* Hide the number input */
@@ -330,7 +386,7 @@ p{
 }
 .full-width-slider .ui-slider-track {
     margin: 0 auto;
-    width: 30%;
+    width: 50%;
 }
 
 .slider-container{

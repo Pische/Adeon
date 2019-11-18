@@ -150,16 +150,12 @@
     <BundleResource Include="Resources\Milan\assets\icons\BoxSecretSpots.png" />
     <BundleResource Include="Resources\Milan\assets\icons\help.png" />
     <BundleResource Include="Resources\Milan\assets\icons\BoxArchitetturaSelected.png" />
-    <BundleResource Include="Resources\Milan\assets\icons\italian.png" />
     <BundleResource Include="Resources\Milan\assets\icons\swipeup.png" />
     <BundleResource Include="Resources\Milan\assets\icons\architecture_selected.png" />
-    <BundleResource Include="Resources\Milan\assets\icons\range.png" />
     <BundleResource Include="Resources\Milan\assets\icons\art.png" />
     <BundleResource Include="Resources\Milan\assets\icons\BoxArt.png" />
     <BundleResource Include="Resources\Milan\assets\icons\BoxSpotsSelected.png" />
     <BundleResource Include="Resources\Milan\assets\icons\blk_range.png" />
-    <BundleResource Include="Resources\Milan\assets\icons\text.png" />
-    <BundleResource Include="Resources\Milan\assets\icons\english.png" />
     <BundleResource Include="Resources\Milan\assets\icons\architecture.png" />
     <BundleResource Include="Resources\Milan\css\fonts\Montserrat-SemiBold.ttf" />
     <BundleResource Include="Resources\Milan\css\fonts\Montserrat-Bold.ttf" />
@@ -173,7 +169,6 @@
     <BundleResource Include="Resources\Milan\assets\box\BoxSpotsSelected.png" />
     <BundleResource Include="Resources\Milan\js\DB_Aneddoti.js" />
     <BundleResource Include="Resources\Milan\js\DB_Milan.js" />
-    <BundleResource Include="Resources\Milan\js\1.txt" />
     <BundleResource Include="Resources\Milan\assets\icons\pause.png" />
     <BundleResource Include="Resources\Milan\assets\icons\play.png" />
     <BundleResource Include="Resources\Milan\assets\POI\.DS_Store" />
@@ -183,6 +178,14 @@
     <BundleResource Include="Resources\Milan\assets\POI\audio\Duomo1.mp3" />
     <BundleResource Include="Resources\Milan\assets\icons\close.png" />
     <BundleResource Include="Resources\Milan\assets\icons\hand-next2.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxSpotsScopri.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxArtScopri.png" />
+    <BundleResource Include="Resources\Milan\assets\box\BoxArchitetturaScopri.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\english.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\italian.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\range.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\range_slider.png" />
+    <BundleResource Include="Resources\Milan\assets\icons\text.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Milan\css\fonts\" />

@@ -18,5 +18,13 @@ var DB_Milan = [
         "altitude": AR.CONST.UNKNOWN_ALTITUDE,
         "name": "Waschenbach",
         "category": "secret_spots",
+    },
+    {
+        "id": "1",
+        "longitude": 9.1568637,
+        "latitude": 45.3986318,
+        "altitude": AR.CONST.UNKNOWN_ALTITUDE,
+        "name": "Duomo",
+        "category": "architecture",
     }
 ];

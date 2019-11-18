@@ -42,18 +42,20 @@
 
             <!--RANGE-->
             <a href="javascript: World.showRange();" class="ui-btn-left ui-btn ui-btn-inline ui-corner-all trasparent-btn">
-                <img src="assets/icons/range.png" alt="Range" id="range">
-            </a>
-
-            <!--SETTINGS-->
-            <a href="javascript: World.showSettings();" class="ui-btn-right ui-btn ui-btn-inline ui-corner-all trasparent-btn">
-                <img src="assets/icons/settings.png" alt="Impostazioni" class="main-icons" id="settings">
+                <img src="assets/icons/range.png" alt="Range" class="main-icons" id="range">
             </a>
 
             <!--HELP-->
             <a href="javascript: World.showHelp();" class="ui-btn-right ui-btn ui-btn-inline ui-corner-all trasparent-btn">
                 <img src="assets/icons/help.png" alt="Aiuto" class="main-icons" id="help">
             </a>
+
+                        <!--SETTINGS-->
+            <a href="javascript: World.showSettings();;" class="ui-btn-right ui-btn ui-btn-inline ui-corner-all trasparent-btn">
+                <img src="assets/icons/settings.png" alt="Impostazioni" class="main-icons" id="settings">
+            </a>
+
+            
         </div>
 
         <!-- FOOTER -->
@@ -162,6 +164,69 @@
                         <p id="txt-aneddoto"></p>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- BOX IMPOSTAZIONI -->
+        <div class="popup" id="settings-popup">
+            <img src="assets/icons/close.png" class="close" id="close-settings" />
+            <h1>IMPOSTAZIONI</h1>
+            <h2>CAMBIA LINGUA</h2>
+            <p>Puoi scegliere di cambiare lingua e passare all’inglese in qualsiasi momento<br><b>(COMING SOON)</b></p>
+            <div class="language">
+                <img src="assets/icons/italian.png" id="l-italiano">
+                <img src="assets/icons/english.png" id="l-english">
+            </div>
+            <h2>CHI SIAMO</h2>
+            <p>
+                Adeon è stata realizzata da Dafne Cipriani e Vincenzo Pischetola, due studenti dell’Università degli Studi di Milano Bicocca
+            </p>
+            <h2 style="margin-top:10% !important;">SCRIVICI</h2>
+            <p>
+                Se riscontri un problema con l’applicazione mandaci una email a <span>info@adeon.it</span>
+            </p>
+        </div>
+
+        <!-- BOX HELP -->
+        <div class="popup" id="help-popup">
+            <img src="assets/icons/close.png" class="close" id="close-help" />
+            <h1>COSA PUOI FARE SU ADEON</h1>
+            <div class="help-text">
+                <ol>
+                    <li value="1">
+                        <p>
+                            Scegliere la categoria di luoghi che ti interessa visitare tra ARTE, ARCHITETTURA e MILANO NASCOSTA. Puoi sempre cambiarla in un secondo momento facendo swipe in basso 
+                        </p>
+                    </li>
+                </ol>
+            </div>
+            <div>
+                <img src="assets/icons/art.png" class="icon-help" hspace="5">
+                <img src="assets/icons/architecture.png" class="icon-help" hspace="5">
+                <img src="assets/icons/spots.png" class="icon-help" hspace="5">
+            </div>
+            <div class="help-text">
+                <ol>
+                    <li value="2">
+                        <p>
+                            Scegliere la distanza entro cui vuoi spostarti da 1 a 3 km. Anche la distanza puoi sempre cambiarla in un secondo momento in alto a sinistra
+                        </p>
+                    </li>
+                </ol>
+            </div>
+            <img src="assets/icons/range_slider.png" id="image-slider">
+            <div class="help-text">
+                <ol>
+                    <li value="3">
+                        <p>
+                            Quando arrivi al luogo o al monumento che hai scelto puoi scegliere se ascoltare o leggere gli aneddoti e le curiosità di quel luogo
+                        </p>
+                    </li>
+                </ol>
+            </div>
+            <div>
+                <img src="assets/icons/text.png" class="icon-play-text" hspace="20">
+                <img src="assets/icons/play.png" class="icon-play-text" hspace="20" />
             </div>
         </div>
     </div>

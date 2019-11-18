@@ -5,7 +5,8 @@ var World = {
 
     /*  POI-Marker assets. */
     markerDrawableIdle: null,
-    markerDrawableSelected:null,
+    markerDrawableSelected: null,
+    markerDrawableScopri: null,
 
     /*  Contiene la categoria selezionata (art, architecture, secret_spots */
     selectedCategory: null,
@@ -38,6 +39,10 @@ var World = {
             World.markerDrawableSelected = new AR.ImageResource("assets/box/BoxArtSelected.png", {
                 onError: World.onError
             });
+
+            World.markerDrawableScopri = new AR.ImageResource("assets/box/BoxArtScopri.png", {
+                onError: World.onError
+            });
         }
         else if (World.selectedCategory == "architecture") {
             World.markerDrawableIdle = new AR.ImageResource("assets/box/BoxArchitettura.png", {
@@ -47,13 +52,19 @@ var World = {
             World.markerDrawableSelected = new AR.ImageResource("assets/box/BoxArchitetturaSelected.png", {
                 onError: World.onError
             });
+            World.markerDrawableScopri = new AR.ImageResource("assets/box/BoxArchitetturaScopri.png", {
+                onError: World.onError
+            });
         }
-        else {
+        else if (World.selectedCategory == "secret_spots"){
             World.markerDrawableIdle = new AR.ImageResource("assets/box/BoxSecretSpots.png", {
                 onError: World.onError
             });
 
             World.markerDrawableSelected = new AR.ImageResource("assets/box/BoxSpotsSelected.png", {
+                onError: World.onError
+            });
+            World.markerDrawableScopri = new AR.ImageResource("assets/box/BoxSpotsScopri.png", {
                 onError: World.onError
             });
         }
@@ -84,6 +95,7 @@ var World = {
                     "longitude": parseFloat(poiData[currentPlaceNr].longitude),
                     "altitude": parseFloat(poiData[currentPlaceNr].altitude),
                     "title": poiData[currentPlaceNr].name,
+                    "distanceToUser": null
                 };
 
                 World.markerList.push(new Marker(singlePoi));
@@ -95,10 +107,6 @@ var World = {
 
         /* Imposto il range massimo (3km) */
         AR.context.scene.cullingDistance = World.maxRange;
-
-        /* Set distance slider to 3km. 
-        $("#slider-12").val(3);
-        $("#slider-12").slider("refresh");*/
     },
 
     /*
@@ -134,18 +142,32 @@ var World = {
                 Carico il database se non è già stato fatto altrimenti, ogni 10
                 aggiornamenti di posizione, aggiorno la distanza tra l'utente
                 e i vari marker
-            */
+            
             if (!World.initiallyLoadedData) {
                 alert("carico dati first time location changed");
                 World.initiallyLoadedData = true;
                 World.requestDataFromLocal(lat, lon);
-            } else if (World.locationUpdateCounter === 0) {
+            } else*/
+            if (World.locationUpdateCounter === 0) {
                 /*
                     Aggiorna frequentemente le informazioni sulla distanza
                     dell'utente. You max also update distances only every 10m with
                     some more effort.
-                 */
+                */
                 World.updateDistanceToUserValues();
+
+                
+                for (var i = 0; i < World.markerList.length; i++) {
+                    var distance = World.chooseUnit(World.markerList[i]);
+
+                    World.markerList[i].descriptionLabel.text = distance;
+
+                    /*  Se l'utente si trova a 200m dal POI, avvio animazione
+                        SCOPRI */
+                    if (World.markerList[i].distanceToUser <= 200) {
+                        //World.markerList[i].markerObject.setScopri(World.markerList[i]);
+                    }
+                }
             }
 
             /* Helper used to update placemark information every now and then
@@ -180,14 +202,7 @@ var World = {
             marker.distanceToUser = marker.markerObject.locations[0].distanceToUser();
         }
 
-        /*
-            Distance and altitude are measured in meters by the SDK. You may convert them to miles / feet if
-            required.
-        */
-        var distanceToUserValue = (marker.distanceToUser > 999) ?
-            ((marker.distanceToUser / 1000).toFixed(2) + " km") :
-            (Math.round(marker.distanceToUser) + " m");
-
+        
         /* Deselect AR-marker when user exits detail screen div. */
         $("#panel-poidetail").on("panelbeforeclose", function (event, ui) {
             
@@ -212,10 +227,6 @@ var World = {
                 $("#txt-aneddoto").html(DB_Aneddoti[i].txt);
 
                 $("#aneddoto-pause").hide();
-
-                /*
-                 * Risolvere problema caricamento nuovo audio (forse destroy() non va inserito)
-                */
 
                 /*  Carico audio */
                 World.audio = new AR.Sound(DB_Aneddoti[i].audio, {
@@ -439,6 +450,28 @@ var World = {
         $("#swipeup").hide();
     },
 
+    showSettings: function showSettingsFn() {
+        $("#settings-popup").fadeIn(600);
+        $("#close-settings").on("click", function () {
+            $("#settings-popup").fadeOut(600);
+        });
+    },
+
+    showHelp: function showHelpFn() {
+        $("#help-popup").fadeIn(600);
+        $("#close-help").on("click", function () {
+            $("#help-popup").fadeOut(600);
+        });
+    },
+
+    chooseUnit: function chooseUnitFn(marker) {
+        var distanceToUserValue= (marker.distanceToUser > 999) ?
+            ((marker.distanceToUser / 1000).toFixed(2) + " km") :
+            (Math.round(marker.distanceToUser) + " m");
+
+        return distanceToUserValue;
+    },
+
     /* WELCOME PAGE */
     welcomeToAdeon: function welcomeToAdeonFn() {
         if (World.firstTime == true) {
@@ -541,6 +574,8 @@ $(document).ready(function () {
     $("#category-popup").hide();
     $("#range-popup").hide();
     $("#error-popup").hide();
+    $("#settings-popup").hide();
+    $("#help-popup").hide();
 
     /* Nascondo le main icons*/
     $("#range").hide();
@@ -586,7 +621,6 @@ $(document).ready(function () {
     $("#slider-12").on("slidestop", function (e) {
         World.updateRangeValues();
     });
-    
 });
 
 /* Forward locationChanges to custom function.
