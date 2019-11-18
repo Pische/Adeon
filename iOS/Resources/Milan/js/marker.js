@@ -5,7 +5,6 @@ function Marker(poiData) {
 
     this.poiData = poiData;
     this.isSelected = false;
-    this.isScopri = false;
 
     /*
         Con AR.PropertyAnimations sei in grado di animare quasi tutte le
@@ -19,7 +18,6 @@ function Marker(poiData) {
     */
     this.animationGroupIdle = null;
     this.animationGroupSelected = null;
-    this.animationGroupScopri = null;
 
     /*  Creo AR.GeoLocation dalle coordinate del POI */
     var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude, poiData.altitude);
@@ -56,7 +54,7 @@ function Marker(poiData) {
         ((markerLocation.distanceToUser() / 1000).toFixed(2) + " km") : (Math.round(markerLocation.distanceToUser()) + " m");
 
     /* Creo un AR.Label per il titolo del marker. */
-    this.titleLabel = new AR.Label(poiData.title, 0.6, {
+    this.titleLabel = new AR.Label(poiData.title, 0.5, {
         zOrder: 1,
         translate: {
             y: -0.20
@@ -283,71 +281,6 @@ Marker.prototype.setDeselected = function(marker) {
 
     /* Starts the idle-state animation. */
     marker.animationGroupIdle.start();
-};
-
-Marker.setScopri = function (marker) {
-
-    /* New: . */
-    if (marker.animationGroupSelected === null) {
-        marker.isScopri = true;
-
-        var easingCurve = new AR.EasingCurve(AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC, {
-            amplitude: 2.0
-        });
-
-        /* Create AR.PropertyAnimation that animates the opacity to 0.0 in order to hide the idle-state-drawable. */
-        var hideIdleDrawableAnimation = new AR.PropertyAnimation(
-            marker.markerDrawableIdle, "opacity", null, 0.0, changeAnimationDuration);
-        /* Create AR.PropertyAnimation that animates the opacity to 1.0 in order to show the selected-state-drawable. */
-        var showSelectedDrawableAnimation = new AR.PropertyAnimation(
-            marker.markerDrawableScopri, "opacity", null, 1.0, changeAnimationDuration);
-
-        /* Create AR.PropertyAnimation that animates the scaling of the idle-state-drawable to 1.2. */
-        var idleDrawableResizeAnimationX = new AR.PropertyAnimation(
-            marker.markerDrawableIdle, 'scale.x', null, 1.2, resizeAnimationDuration, easingCurve);
-        /* Create AR.PropertyAnimation that animates the scaling of the selected-state-drawable to 1.2. */
-        var selectedDrawableResizeAnimationX = new AR.PropertyAnimation(
-            marker.markerDrawableScopri, 'scale.x', null, 1.2, resizeAnimationDuration, easingCurve);
-        /* Create AR.PropertyAnimation that animates the scaling of the title label to 1.2. */
-        var titleLabelResizeAnimationX = new AR.PropertyAnimation(
-            marker.titleLabel, 'scale.x', null, 1.2, resizeAnimationDuration, easingCurve);
-        /* Create AR.PropertyAnimation that animates the scaling of the description label to 1.2. */
-        var descriptionLabelResizeAnimationX = new AR.PropertyAnimation(
-            marker.descriptionLabel, 'scale.x', null, 1.2, resizeAnimationDuration, easingCurve);
-
-        /* Create AR.PropertyAnimation that animates the scaling of the idle-state-drawable to 1.2. */
-        var idleDrawableResizeAnimationY = new AR.PropertyAnimation(
-            marker.markerDrawableIdle, 'scale.y', null, 1.2, resizeAnimationDuration, easingCurve);
-        /* Create AR.PropertyAnimation that animates the scaling of the selected-state-drawable to 1.2. */
-        var selectedDrawableResizeAnimationY = new AR.PropertyAnimation(
-            marker.markerDrawableScopri, 'scale.y', null, 1.2, resizeAnimationDuration, easingCurve);
-        /* Create AR.PropertyAnimation that animates the scaling of the title label to 1.2. */
-        var titleLabelResizeAnimationY = new AR.PropertyAnimation(
-            marker.titleLabel, 'scale.y', null, 1.2, resizeAnimationDuration, easingCurve);
-        /* Create AR.PropertyAnimation that animates the scaling of the description label to 1.2. */
-        var descriptionLabelResizeAnimationY = new AR.PropertyAnimation(
-            marker.descriptionLabel, 'scale.y', null, 1.2, resizeAnimationDuration, easingCurve);
-
-        /*
-            There are two types of AR.AnimationGroups. Parallel animations are running at the same time,
-            sequentials are played one after another. This example uses a parallel AR.AnimationGroup.
-        */
-        marker.animationGroupScopri = new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [
-            hideIdleDrawableAnimation,
-            showSelectedDrawableAnimation,
-            idleDrawableResizeAnimationX,
-            selectedDrawableResizeAnimationX,
-            titleLabelResizeAnimationX,
-            descriptionLabelResizeAnimationX,
-            idleDrawableResizeAnimationY,
-            selectedDrawableResizeAnimationY,
-            titleLabelResizeAnimationY,
-            descriptionLabelResizeAnimationY
-        ]);
-    }
-
-    /* Starts the selected-state animation. */
-    marker.animationGroupScopri.start();
 };
 
 Marker.prototype.isAnyAnimationRunning = function(marker) {

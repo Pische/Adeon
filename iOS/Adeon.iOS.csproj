@@ -167,14 +167,12 @@
     <BundleResource Include="Resources\Milan\assets\box\BoxArtSelected.png" />
     <BundleResource Include="Resources\Milan\assets\box\BoxSecretSpots.png" />
     <BundleResource Include="Resources\Milan\assets\box\BoxSpotsSelected.png" />
-    <BundleResource Include="Resources\Milan\js\DB_Aneddoti.js" />
-    <BundleResource Include="Resources\Milan\js\DB_Milan.js" />
     <BundleResource Include="Resources\Milan\assets\icons\pause.png" />
     <BundleResource Include="Resources\Milan\assets\icons\play.png" />
     <BundleResource Include="Resources\Milan\assets\POI\.DS_Store" />
     <BundleResource Include="Resources\Milan\assets\POI\img\.DS_Store" />
-    <BundleResource Include="Resources\Milan\assets\POI\img\Duomo_2.png" />
-    <BundleResource Include="Resources\Milan\assets\POI\img\Duomo_1.png" />
+    <BundleResource Include="Resources\Milan\assets\POI\img\DuomoDiMilano_2.png" />
+    <BundleResource Include="Resources\Milan\assets\POI\img\DuomoDiMilano_1.png" />
     <BundleResource Include="Resources\Milan\assets\POI\audio\Duomo1.mp3" />
     <BundleResource Include="Resources\Milan\assets\icons\close.png" />
     <BundleResource Include="Resources\Milan\assets\icons\hand-next2.png" />
@@ -186,10 +184,16 @@
     <BundleResource Include="Resources\Milan\assets\icons\range.png" />
     <BundleResource Include="Resources\Milan\assets\icons\range_slider.png" />
     <BundleResource Include="Resources\Milan\assets\icons\text.png" />
+    <BundleResource Include="Resources\Milan\DB\DB_Aneddoti.js" />
+    <BundleResource Include="Resources\Milan\DB\DB_Milan.js" />
+    <BundleResource Include="Resources\Milan\assets\POI\img\PinacotecaDiBrera_1.png" />
+    <BundleResource Include="Resources\Milan\assets\POI\img\GiardiniPubbliciDiPortaVenezia_1.png" />
+    <BundleResource Include="Resources\Milan\assets\POI\img\Palestro_1.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Milan\css\fonts\" />
     <Folder Include="Resources\Milan\assets\box\" />
+    <Folder Include="Resources\Milan\DB\" />
   </ItemGroup>
   <Import Project="..\Adeon\Adeon.projitems" Label="Shared" Condition="Exists('..\Adeon\Adeon.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -170,11 +170,10 @@ var World = {
                 }
             }
 
-            /* Helper used to update placemark information every now and then
-             * (e.g. every 10 location upadtes fired).
-             *
-             * Counter per aggiornare le informazioni sulla distanza
-             * dell'utente ogni 10m*/
+            /*
+                Counter usato per aggiornare le informazioni sulla distanza
+                dell'utente ogni 10m
+            */
             World.locationUpdateCounter =
                 (++World.locationUpdateCounter % World.updatePlacemarkDistancesEveryXLocationUpdates);
         }   
@@ -201,12 +200,6 @@ var World = {
         if (undefined === marker.distanceToUser) {
             marker.distanceToUser = marker.markerObject.locations[0].distanceToUser();
         }
-
-        
-        /* Deselect AR-marker when user exits detail screen div. */
-        $("#panel-poidetail").on("panelbeforeclose", function (event, ui) {
-            
-        });
     },
 
     showAneddoto: function showAneddotoFn() {

@@ -12,8 +12,8 @@
     <script src="../ade.js"></script>
 
     <!-- important for static POI loading - include the static data  -->
-    <script type="text/javascript" src="js/DB_Milan.js"></script>
-    <script type="text/javascript" src="js/DB_Aneddoti.js"></script>
+    <script type="text/javascript" src="DB/DB_Milan.js"></script>
+    <script type="text/javascript" src="DB/DB_Aneddoti.js"></script>
 
     <!-- jquery mobile CSS -->
     <link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css" />
@@ -50,7 +50,7 @@
                 <img src="assets/icons/help.png" alt="Aiuto" class="main-icons" id="help">
             </a>
 
-                        <!--SETTINGS-->
+            <!--SETTINGS-->
             <a href="javascript: World.showSettings();;" class="ui-btn-right ui-btn ui-btn-inline ui-corner-all trasparent-btn">
                 <img src="assets/icons/settings.png" alt="Impostazioni" class="main-icons" id="settings">
             </a>
@@ -103,7 +103,10 @@
 
         <div class="popup" id="category-popup">
             <h1>SELEZIONA LA CATEGORIA</h1>
-            <p>Scopri gli aneddoti della categoria che ti interessa di più</p>
+            <div id="category-popup-text">
+                <p>Scopri gli aneddoti della categoria che ti interessa di più</p>
+            </div>
+            
             <div class="select-category">
                 <div class="elenco">
                     <img src="assets/icons/art.png" class="icon-mini">
@@ -130,7 +133,7 @@
 
         <div class="popup" id="range-popup">
             <h1>SCEGLI LA DISTANZA</h1>
-            <p>Imposta il raggio di azione da 1 a 3 km.<br>Successivamente potrai modificarlo</p>
+            <p>Imposta il raggio di azione da 1 a 3 km. Successivamente potrai modificarlo</p>
         </div>
         
 
@@ -172,7 +175,7 @@
             <img src="assets/icons/close.png" class="close" id="close-settings" />
             <h1>IMPOSTAZIONI</h1>
             <h2>CAMBIA LINGUA</h2>
-            <p>Puoi scegliere di cambiare lingua e passare all’inglese in qualsiasi momento<br><b>(COMING SOON)</b></p>
+            <p>Puoi scegliere di cambiare lingua e passare all’inglese in qualsiasi momento <b>(COMING SOON)</b></p>
             <div class="language">
                 <img src="assets/icons/italian.png" id="l-italiano">
                 <img src="assets/icons/english.png" id="l-english">
