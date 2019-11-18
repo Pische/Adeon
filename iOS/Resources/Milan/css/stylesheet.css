@@ -315,6 +315,13 @@ p{
     margin: 0;
 }
 
+#hand-scroll{
+    transform: translateX(-50%);
+    top: 80%;
+    left: 50%;
+    margin: 0;
+}
+
 /* SLIDER */
 
 /* Hide the number input */

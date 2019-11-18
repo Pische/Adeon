@@ -20,6 +20,7 @@ var World = {
     /*  True se è la prima volta che avvia l'app */
     firstTime: true,
     firstAneddoto: true,
+    audio: null,
 
     maxRange: 3000,
 
@@ -170,9 +171,6 @@ var World = {
 
         World.showAneddoto();
 
-        /* Mostro box aneddoti*/
-        $("#box-aneddoti").fadeIn(600);
-
         /*
             It's ok for AR.Location subclass objects to return a distance of `undefined`. In case such a distance
             was calculated when all distances were queried in `updateDistanceToUserValues`, we recalculate this
@@ -199,7 +197,6 @@ var World = {
     showAneddoto: function showAneddotoFn() {
         var i = 0;
         var exit = false;
-        var audio = null;
 
         while (i < DB_Aneddoti.length && exit == false) {
             /*
@@ -220,8 +217,8 @@ var World = {
                  * Risolvere problema caricamento nuovo audio (forse destroy() non va inserito)
                 */
 
-                /*  Carico audio 
-                audio = new AR.Sound(DB_Aneddoti[i].audio, {
+                /*  Carico audio */
+                World.audio = new AR.Sound(DB_Aneddoti[i].audio, {
                     onFinishedPlaying: function () {
                         $("#aneddoto-pause").hide();
                         $("#aneddoto-play").show();
@@ -231,27 +228,31 @@ var World = {
                     },
                 });
 
-                $("#aneddoto-play, #aneddoto-pause").click(function () {
-                    if (audio.state == AR.CONST.STATE.PAUSED) {
-                        audio.resume();
+                World.audio.load();
+
+                $("#aneddoto-play").click(function () {
+                    if (World.audio.state == AR.CONST.STATE.PAUSED) {
+                        World.audio.resume();
                         $("#aneddoto-play").hide();
                         $("#aneddoto-pause").show();
                     }
-                    else if (audio.state != AR.CONST.STATE.PLAYING) {
-                        audio.play();
+                    else if (World.audio.state == AR.CONST.STATE.PLAYING) {
+                        //non faccio niente
+                    }
+                    else {
+                        World.audio.play();
                         $("#aneddoto-play").hide();
                         $("#aneddoto-pause").show();
                     }
-                    else if (audio.state == AR.CONST.STATE.PLAYING) {
-                        audio.pause();
+                });
+
+                $("#aneddoto-pause").click(function () {
+                    if (World.audio.state == AR.CONST.STATE.PLAYING) {
+                        World.audio.pause();
                         $("#aneddoto-pause").hide();
                         $("#aneddoto-play").show();
                     }
-                    else {
-                        $("#aneddoto-play").show();
-                    }
                 });
-                audio.load();*/
             }
             i++;
         }
@@ -259,18 +260,19 @@ var World = {
         if (World.firstAneddoto == true) {
             i = 0;
             while (i < 2) {
-                $("#hand-close").fadeIn(600);
-                $("#hand-close").animate({
-                    top: '+=45%'
+                $("#hand-scroll").fadeIn(600);
+                $("#hand-scroll").animate({
+                    top: '-=10%'
                 }, 2000);
-                $("#hand-close").fadeOut(600);
-                $("#hand-close").animate({
-                    top: '-=45%'
+                $("#hand-scroll").fadeOut(600);
+                $("#hand-scroll").animate({
+                    top: '+=10%'
                 }, 1);
                 i++;
             }
             i = 0;
-            $("#hand-close").promise().done(function () {
+
+            $("#hand-scroll").promise().done(function () {
                 while (i < 2) {
                     $("#hand-next").fadeIn(600);
                     $("#hand-next").animate({
@@ -282,23 +284,50 @@ var World = {
                     }, 1);
                     i++;
                 }
+
+                i = 0;
+                $("#hand-next").promise().done(function () {
+                    while (i < 2) {
+                        $("#hand-close").fadeIn(600);
+                        $("#hand-close").animate({
+                            top: '+=45%'
+                        }, 2000);
+                        $("#hand-close").fadeOut(600);
+                        $("#hand-close").animate({
+                            top: '-=45%'
+                        }, 1);
+                        i++;
+                    }
+                });
             });
+
+            World.firstAneddoto = false;
         }
 
-        /* PANNELLO DETTAGLI */
+        /* Mostro box aneddoti*/
+        $("#box-aneddoti").fadeIn(600);
+
+        /* Swipe down e swipe left sul box aneddoti */
         $('#img-aneddoto').on('swipedown', function () {
             World.currentMarker.setDeselected(World.currentMarker);
             World.currentAneddoto = null;
-            /*audio.stop();
-            audio.destroy();*/
+            $("#aneddoto-pause").hide();
+            $("#aneddoto-play").show();
+            World.audio.stop();
+            World.audio.destroy();
             $("#box-aneddoti").fadeOut(600);
             $("#footer").fadeIn(600);
         });
 
         $('#img-aneddoto').on('swipeleft', function () {
-            /*audio.stop();
-            audio.destroy();*/
-            World.showAneddoto();
+            $("#aneddoto-pause").hide();
+            $("#aneddoto-play").show();
+            $("#box-aneddoti").fadeOut(600);
+            World.audio.stop();
+            World.audio.destroy();
+            $("#box-aneddoti").promise().done(function () {
+                World.showAneddoto();
+            });
         });
     },
 
@@ -317,6 +346,7 @@ var World = {
     updateRangeValues: function updateRangeValuesFn() {
 
         if (World.firstTime == true) {
+            $("#hand-choose").stop(true).fadeOut(600);
             $("#range-popup").fadeOut(600);
             $("#footer").show();
             $("#swipeup").fadeIn(600);
@@ -462,6 +492,7 @@ var World = {
             $("#range-popup").fadeIn(600);
 
             /* Animazione mano */
+            $("#hand-choose").stop(true).hide();
             $("#hand-choose").css("left", "10%");
             $("#hand-choose").fadeIn(600);
             $("#hand-choose").animate({
@@ -510,10 +541,6 @@ $(document).ready(function () {
     $("#category-popup").hide();
     $("#range-popup").hide();
     $("#error-popup").hide();
-    $("#hand-choose").hide();
-    $("#hand-close").hide();
-    $("#hand-next").hide();
-    $("#hand-scroll").hide();
 
     /* Nascondo le main icons*/
     $("#range").hide();
@@ -521,12 +548,18 @@ $(document).ready(function () {
     $("#help").hide();
     $("#footer").hide();
 
+    /* Nascondo le mani dei tutorial */
+    $("#hand-choose").hide();
+    $("#hand-close").hide();
+    $("#hand-next").hide();
+    //$("#hand-scroll").hide();
+
     /* Nascondo box aneddoti */
     $("#box-aneddoti").hide();
 
     World.welcomeToAdeon();
 
-/* Funzioni di swipe up e swipe down dei pannelli */
+    /* Funzioni di swipe up e swipe down dei pannelli */
 
     /* CATEGORIE */
     $('#footer').on('swipeup', function () {
