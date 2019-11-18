@@ -21,7 +21,7 @@ var DB_Aneddoti = [
     {
         "id": "1",
         "id_POI": "2",
-        "txt": "VIA PALESTRO, 27 LUGLIO 1993. Alle 23: 14 un’autobomba esplode davanti alla Villa Reale, danneggiando e distruggendo completamente l’adiacente Padiglione di Arte Contemporanea.Cinque persone vengono dilaniate dallo scoppio: tre pompieri, un vigile urbano e un immigrato marocchino.Poco dopo esploderanno a Roma due ordigni e nelle stesse ore verrà registrato un black- out telefonico a Palazzo Chigi.La Corte condannerà sei persone come esecutori materiali.Altri due se ne aggiungeranno poco tempo dopo.",
+        "txt": "VIA PALESTRO, 27 LUGLIO 1993. Alle 23: 14 un’autobomba esplode davanti alla Villa Reale, danneggiando e distruggendo completamente l’adiacente Padiglione di Arte Contemporanea. Cinque persone vengono dilaniate dallo scoppio: tre pompieri, un vigile urbano e un immigrato marocchino. Poco dopo esploderanno a Roma due ordigni e nelle stesse ore verrà registrato un black-out telefonico a Palazzo Chigi. La Corte condannerà sei persone come esecutori materiali. Altri due se ne aggiungeranno poco tempo dopo.",
         "img": "assets/POI/img/Palestro_1.png",
         "audio": "https://pische.altervista.org/wp-content/uploads/2019/11/Palestro.m4a"
     },

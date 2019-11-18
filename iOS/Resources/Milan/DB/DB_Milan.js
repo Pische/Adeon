@@ -37,11 +37,11 @@ var DB_Milan = [
     },
     /* PROVA CASA VINCENZO */
     {
-        "id": "3",
+        "id": "2",
         "longitude": 9.238569,
         "latitude": 45.290050,
         "altitude": AR.CONST.UNKNOWN_ALTITUDE,
-        "name": "Giardini Pubblici di Porta Venezia",
+        "name": "Duomo di Milano",
         "category": "architecture",
     },
 ];
