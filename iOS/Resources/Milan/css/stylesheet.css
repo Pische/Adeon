@@ -172,7 +172,7 @@ p, ol li{
 }
 
 #range-popup{
-    padding: 3% 3% 4% 3%;
+    padding: 5% 3% 6% 3%;
 }
 
 #error-popup{
@@ -202,7 +202,7 @@ p, ol li{
 
 #category-popup-text p,
 #range-popup p{
-    text-align: justify !important;
+    text-align: center !important;
 }
 
 

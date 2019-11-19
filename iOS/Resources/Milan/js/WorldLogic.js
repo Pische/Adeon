@@ -324,7 +324,7 @@ var World = {
         });
 
         var exit2 = false;
-
+        i = 0;
         $('#img-aneddoto').on('swipeleft', function () {
             while (i < DB_Aneddoti.length && exit2 == false) {
                 /*
@@ -338,6 +338,34 @@ var World = {
                     World.audio.stop();
                     World.audio.destroy();
                     $("#box-aneddoti").fadeOut(600);
+                    $("#box-aneddoti").promise().done(function () {
+                        World.showAneddoto();
+                    });
+                }
+                i++;
+            }
+        });
+
+        var exit3= false;
+        i = 0;
+        /* FUNZIONE MOMENTANEA PER TORNARE INDIETRO NEGLI ANEDDOTI */
+        $('#img-aneddoto').on('swiperight', function () {
+            while (i < DB_Aneddoti.length && exit3 == false) {
+                /*
+                    Controllo se ci sono altri aneddoti prima
+                 */
+                if (DB_Aneddoti[i].id_POI == World.currentMarker.poiData.id &&
+                    DB_Aneddoti[i].id < World.currentAneddoto) {
+                    exit3 = true;
+                    $("#aneddoto-pause").hide();
+                    $("#aneddoto-play").show();
+                    World.audio.stop();
+                    World.audio.destroy();
+                    $("#box-aneddoti").fadeOut(600);
+
+                    //momentaneo per tornare indietro
+                    World.currentAneddoto = null;
+
                     $("#box-aneddoti").promise().done(function () {
                         World.showAneddoto();
                     });

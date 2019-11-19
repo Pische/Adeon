@@ -54,7 +54,7 @@ function Marker(poiData) {
         ((markerLocation.distanceToUser() / 1000).toFixed(2) + " km") : (Math.round(markerLocation.distanceToUser()) + " m");
 
     /* Creo un AR.Label per il titolo del marker. */
-    this.titleLabel = new AR.Label(poiData.title, 0.5, {
+    this.titleLabel = new AR.Label(poiData.title, 0.4, {
         zOrder: 1,
         translate: {
             y: -0.20
@@ -66,7 +66,7 @@ function Marker(poiData) {
     });
 
     /* Creo un AR.Label per la distanza mostrata sul marker. */
-    this.descriptionLabel = new AR.Label(distance, 0.5, {
+    this.descriptionLabel = new AR.Label(distance, 0.4, {
         zOrder: 1,
         translate: {
             y: -0.75

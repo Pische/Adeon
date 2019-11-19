@@ -24,7 +24,7 @@ var DB_Milan = [
         "latitude": 45.4744236,
         "longitude": 9.1971722,
         "altitude": AR.CONST.UNKNOWN_ALTITUDE,
-        "name": "Giardini Pubblici di Porta Venezia",
+        "name": "Giardini di Porta Venezia",
         "category": "architecture",
     },
     {
@@ -44,4 +44,14 @@ var DB_Milan = [
         "name": "Duomo di Milano",
         "category": "architecture",
     },
+
+    /* PROVA BICOCCA */
+    {
+        "id": "3",
+        "latitude": 45.5240318,
+        "longitude": 9.21879,
+        "altitude": AR.CONST.UNKNOWN_ALTITUDE,
+        "name": "Duomo",
+        "category": "secret_spots",
+    }
 ];
