@@ -13,8 +13,8 @@ var DB_Milan = [
     },
     {
         "id": "2",
-        "latitude": 45.4730296,
-        "longitude": 9.19741,
+        "latitude": 45.472805, 
+        "longitude": 9.199878,
         "altitude": AR.CONST.UNKNOWN_ALTITUDE,
         "name": "Strage di Via Palestro",
         "category": "secret_spots",
@@ -35,6 +35,16 @@ var DB_Milan = [
         "name": "Pinacoteca di Brera",
         "category": "art",
     },
+
+    /* PROVA STUDIO */
+    {
+        "id": "1",
+        "longitude": 9.1568637,
+        "latitude": 45.3986318,
+        "altitude": AR.CONST.UNKNOWN_ALTITUDE,
+        "name": "Duomo",
+        "category": "art",
+    },
     /* PROVA CASA VINCENZO */
     {
         "id": "2",
@@ -45,7 +55,7 @@ var DB_Milan = [
         "category": "architecture",
     },
 
-    /* PROVA BICOCCA */
+    /* PROVA BICOCCA 
     {
         "id": "3",
         "latitude": 45.5240318,
@@ -53,5 +63,5 @@ var DB_Milan = [
         "altitude": AR.CONST.UNKNOWN_ALTITUDE,
         "name": "Duomo",
         "category": "secret_spots",
-    }
+    }*/
 ];

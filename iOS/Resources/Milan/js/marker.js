@@ -5,7 +5,7 @@ function Marker(poiData) {
 
     this.poiData = poiData;
     this.isSelected = false;
-
+    this.title = poiData['title'];
     /*
         Con AR.PropertyAnimations sei in grado di animare quasi tutte le
         proprietà degli oggetti ARchitect. In questo caso animerà l'opacità
@@ -36,7 +36,7 @@ function Marker(poiData) {
             isSelected ed esegue la funzione appropriata.
             Il marcatore cliccato viene passato come argomento.
         */
-        onClick: Marker.prototype.getOnClickTrigger(this)
+        onClick: Marker.prototype.getOnClickTrigger(this),
     });
 
     /*  Creo un AR.ImageDrawable per il marker in stato "selezionato" */
@@ -88,7 +88,7 @@ function Marker(poiData) {
     this.markerObject = new AR.GeoObject(markerLocation, {
         drawables: {
             cam: [this.markerDrawableIdle, this.markerDrawableSelected, this.titleLabel, this.descriptionLabel]
-        }
+        },
     });
 
     return this;
@@ -97,14 +97,6 @@ function Marker(poiData) {
 Marker.prototype.getOnClickTrigger = function(marker) {
 
     /*
-        The setSelected and setDeselected functions are prototype Marker functions.
-
-        Both functions perform the same steps but inverted, hence only one function (setSelected) is covered in
-        detail. Three steps are necessary to select the marker. First the state will be set appropriately. Second
-        the background drawable will be enabled and the standard background disabled. This is done by setting the
-        opacity property to 1.0 for the visible state and to 0.0 for an invisible state. Third the onClick function
-        is set only for the background drawable of the selected marker.
-
         Le funzioni setSelected e setDeselected sono funzioni protype del Marker
 
         Entrambe le funzioni eseguono gli stessi passaggi ma sono invertite,
@@ -119,24 +111,23 @@ Marker.prototype.getOnClickTrigger = function(marker) {
     */
 
     return function () {
-        if (!Marker.prototype.isAnyAnimationRunning(marker)) {
-            if (marker.isSelected) {
+        if (marker.distanceToUser <= World.minDistance) {
+            if (!Marker.prototype.isAnyAnimationRunning(marker)) {
+                if (marker.isSelected) {
+                    Marker.prototype.setDeselected(marker);
+                } else {
+                    Marker.prototype.setSelected(marker);
+                    try {
+                        World.onMarkerSelected(marker);
+                    } catch (err) {
+                        alert(err);
+                    }
 
-                Marker.prototype.setDeselected(marker);
-
-            } else {
-                Marker.prototype.setSelected(marker);
-                try {
-                    World.onMarkerSelected(marker);
-                } catch (err) {
-                    alert(err);
                 }
-
+            } else {
+                AR.logger.debug('a animation is already running');
             }
-        } else {
-            AR.logger.debug('a animation is already running');
         }
-
         return true;
     };
 };

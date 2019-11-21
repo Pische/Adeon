@@ -18,7 +18,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>Apple Development: pischetolavincenzo@icloud.com (WL9ZPMF4K8)</CodesignKey>
+    <CodesignKey>Apple Development: music-forever@hotmail.it (M5478X58X3)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchFastDev>true</MtouchFastDev>
@@ -28,7 +28,7 @@
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
     <IpaPackageName></IpaPackageName>
-    <CodesignProvision>iOS Team Provisioning Profile: com.adeonAR.Adeon</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: com.prova50.prova50</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>

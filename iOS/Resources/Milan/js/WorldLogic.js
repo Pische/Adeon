@@ -24,9 +24,10 @@ var World = {
     audio: null,
 
     maxRange: 3000,
+    minDistance: 100,
 
     locationUpdateCounter: 0,
-    updatePlacemarkDistancesEveryXLocationUpdates: 10,
+    updatePlacemarkDistancesEveryXLocationUpdates: 5,
 
     loadMarkerDrawable: function loadMarkerDrawableFn() {
 
@@ -123,6 +124,7 @@ var World = {
        Aggiorna posizione, chiamato ogni volta che viene chiamata
        architectView.setLocation() nel codice nativo
     */
+
     locationChanged: function locationChangedFn(lat, lon, alt, acc) {
         /*
             Salvo la posizione dell'utente in World.userLocation per sapere
@@ -138,16 +140,6 @@ var World = {
         /* Se firstTime=true -> nessuna categoria selezionata quindi non faccio
          nulla*/
         if (World.firstTime != true) {
-            /*
-                Carico il database se non è già stato fatto altrimenti, ogni 10
-                aggiornamenti di posizione, aggiorno la distanza tra l'utente
-                e i vari marker
-            
-            if (!World.initiallyLoadedData) {
-                alert("carico dati first time location changed");
-                World.initiallyLoadedData = true;
-                World.requestDataFromLocal(lat, lon);
-            } else*/
             if (World.locationUpdateCounter === 0) {
                 /*
                     Aggiorna frequentemente le informazioni sulla distanza
@@ -162,10 +154,15 @@ var World = {
 
                     World.markerList[i].descriptionLabel.text = distance;
 
-                    /*  Se l'utente si trova a 200m dal POI, avvio animazione
+                    /*  Se l'utente si trova a 50m dal POI, avvio animazione
                         SCOPRI */
-                    if (World.markerList[i].distanceToUser <= 200) {
-                        //World.markerList[i].markerObject.setScopri(World.markerList[i]);
+                    if (World.markerList[i].distanceToUser <= World.minDistance) {
+                        World.markerList[i].titleLabel.text = "SCOPRI";
+                        World.markerList[i].markerDrawableIdle.imageResource = World.markerDrawableScopri;
+                    }
+                    else if (World.markerList[i].titleLabel.text=="SCOPRI"){
+                        World.markerList[i].titleLabel.text = World.markerList[i].title;
+                        World.markerList[i].markerDrawableIdle.imageResource = World.markerDrawableIdle;
                     }
                 }
             }
@@ -187,18 +184,22 @@ var World = {
 
     /* Fired when user pressed maker in cam. */
     onMarkerSelected: function onMarkerSelectedFn(marker) {
-        World.currentMarker = marker;
-        $("#footer").fadeOut(600);
+        if (marker.distanceToUser != undefined &&
+            marker.distanceToUser <= World.minDistance) {
 
-        World.showAneddoto();
+            World.currentMarker = marker;
+            $("#footer").fadeOut(600);
 
-        /*
-            It's ok for AR.Location subclass objects to return a distance of `undefined`. In case such a distance
-            was calculated when all distances were queried in `updateDistanceToUserValues`, we recalculate this
-            specific distance before we update the UI.
-         */
-        if (undefined === marker.distanceToUser) {
-            marker.distanceToUser = marker.markerObject.locations[0].distanceToUser();
+            World.showAneddoto();
+
+            /*
+                It's ok for AR.Location subclass objects to return a distance of `undefined`. In case such a distance
+                was calculated when all distances were queried in `updateDistanceToUserValues`, we recalculate this
+                specific distance before we update the UI.
+             */
+            if (undefined === marker.distanceToUser) {
+                marker.distanceToUser = marker.markerObject.locations[0].distanceToUser();
+            }
         }
     },
 
@@ -484,16 +485,20 @@ var World = {
     },
 
     showSettings: function showSettingsFn() {
+        $("#footer").fadeOut(600);
         $("#settings-popup").fadeIn(600);
         $("#close-settings").on("click", function () {
             $("#settings-popup").fadeOut(600);
+            $("#footer").fadeIn(600);
         });
     },
 
     showHelp: function showHelpFn() {
+        $("#footer").fadeOut(600);
         $("#help-popup").fadeIn(600);
         $("#close-help").on("click", function () {
             $("#help-popup").fadeOut(600);
+            $("#footer").fadeIn(600);
         });
     },
 
