@@ -180,14 +180,7 @@ namespace Adeon.iOS
             {
                 architectView.Start((WTArchitectStartupConfiguration architectStartupConfiguration) =>
                 {
-                    if (currentCaptureDevicePosition != AVCaptureDevicePosition.Unspecified)
-                    {
-                        architectStartupConfiguration.CaptureDevicePosition = currentCaptureDevicePosition;
-                    }
-                    else
-                    {
-                        architectStartupConfiguration.CaptureDevicePosition = AVCaptureDevicePosition.Back;
-                    }
+                    architectStartupConfiguration.CaptureDevicePosition = AVCaptureDevicePosition.Back;
                     architectStartupConfiguration.CaptureDeviceResolution = WTCaptureDeviceResolution.WTCaptureDeviceResolution_AUTO;
                     architectStartupConfiguration.CaptureDeviceFocusMode = AVCaptureFocusMode.ContinuousAutoFocus;
                 }, (bool success, NSError error) =>
