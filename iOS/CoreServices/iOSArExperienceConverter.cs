@@ -6,9 +6,6 @@ namespace Adeon.iOS.CoreServices
 {
     public class iOSArExperienceConverter
     {
-        public iOSArExperienceConverter()
-        {
-        }
 
         public static WTFeatures ConvertFeatures(Features featuresMask)
         {

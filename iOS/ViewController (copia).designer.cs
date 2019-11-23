@@ -13,6 +13,9 @@ namespace Adeon.iOS
     [Register ("ViewController")]
     partial class ViewController
     {
+        [Outlet]
+        UIKit.UIButton Button { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
         }

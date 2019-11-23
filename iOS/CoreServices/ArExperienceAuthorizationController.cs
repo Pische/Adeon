@@ -7,12 +7,16 @@ namespace Adeon.iOS.CoreServices
 {
     public static class ArExperienceAuthorizationController
     {
-        public static void AuthorizeRestricedAPIAccess(WTAuthorizationRequestManager authorizationRequestManager, WTFeatures requiredFeatures, Action successHandler, Action<UIAlertController> errorHandler)
+        public static void AuthorizeRestricedAPIAccess(WTAuthorizationRequestManager authorizationRequestManager,
+            WTFeatures requiredFeatures, Action successHandler, Action<UIAlertController> errorHandler)
         {
             if (!authorizationRequestManager.RequestingRestrictedAppleiOSSDKAPIAuthorization)
             {
-                NSOrderedSet<NSNumber> restrictedAppleiOSSDKAPIs = WTAuthorizationRequestManager.RestrictedAppleiOSSDKAPIAuthorizationsForRequiredFeatures(requiredFeatures);
-                authorizationRequestManager.RequestRestrictedAppleiOSSDKAPIAuthorization(restrictedAppleiOSSDKAPIs, (bool success, NSError error) =>
+                NSOrderedSet<NSNumber> restrictedAppleiOSSDKAPIs = WTAuthorizationRequestManager
+                    .RestrictedAppleiOSSDKAPIAuthorizationsForRequiredFeatures(requiredFeatures);
+
+                authorizationRequestManager.RequestRestrictedAppleiOSSDKAPIAuthorization(restrictedAppleiOSSDKAPIs,
+                    (bool success, NSError error) =>
                 {
                     if (success)
                     {

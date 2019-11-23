@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Foundation;
 using UIKit;
 using CoreGraphics;
@@ -10,13 +10,12 @@ using Adeon.iOS.CoreServices;
 
 namespace Adeon.iOS
 {
-    public partial class ViewController : UIViewController, IUIGestureRecognizerDelegate
+    public partial class ViewController : UIViewController
     {
         protected class ArchitectDelegate : WTArchitectViewDelegate
         {
             [Weak]
             protected ViewController arExperienceViewController;
-
             public ArchitectDelegate(ViewController arExperienceViewController)
             {
                 this.arExperienceViewController = arExperienceViewController;
@@ -60,23 +59,25 @@ namespace Adeon.iOS
 
         }
 
+
         protected WTArchitectView architectView;
         protected ArchitectDelegate delegateObject;
 
         [Weak]
+        protected ArExperience currentArExperience;
         protected WTNavigation loadedArExperienceNavigation;
         protected WTNavigation loadingArExperienceNavigation;
 
+
         protected NSObject applicationWillResignActiveObserver;
         protected NSObject applicationDidBecomeActiveObserver;
-
-        private WTAuthorizationRequestManager authorizationRequestManager = new WTAuthorizationRequestManager();
 
         protected bool isRunning;
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            // Perform any additional setup after loading the view, typically from a nib.
 
             architectView = new WTArchitectView();
             architectView.SetLicenseKey("rXxGPSn4WA2Bkg6vd1j176qXR6Y9iKULHtta8L2EFDvj8NZymFAkUWOlC8fgj6oUE59u7DLgXTAqU1we2tmkQ2drwhcaxx/FxxJacaM0462FMqDElT7a6klWFLSaf/7B20kiUmiHcriRWTS4lX3l+xN6+X/rwV+DIL+OXZsEf9hTYWx0ZWRfX0/WkNROVvDYiF7eGx0lP/XutcXlZX2otUyKY1s/Q1AxtFtrHRvEeUw11Ti+2O/qij12LF/cOdPMEL2/bKe0bbFHCVJR/lpQEvxG7o25We3l58t1ZPsDzOziNvxD4g8e5HHCILFwFXzesbOMLhc+LrdulPh6sUsrmGiJOmln7dPyHMgxWRa8rYuUR19hRihOftJ1593Pkz1j324PDUoNKYWeHt2gYzc4z3Prdy/oCO3g5hBdrFLnsRdWzfdjyVNR34b+iaCcnUckSMCQ2k7RohreNh5JEDK5DMHCD7dbUc//SS7qFbjmd8V/rworMeA4X/VuZPaJrufYUzXHZJV2xp3zjrF0qj/dO+E2mBA1kJwnZ0LE4XmDwAElabT0U3K4E2lM4UR+I3r3SNj3/6K4SVKs+wtbk5ie8TkYbfXhkWQKeug8Bn1lOsPVKGUuAxRtCni4L2HQpQ2vtbDZgdVaEAMRjPRoEmx0txT3W1FNJhkJCTUL05jM/sEn3VcCEzUxKA+snBjk9ys+D497kw/FL/qW81bHWPi6gNev8LNLxzgdvrcoCBepMko5HrGq0UyJNOg8Xz+Zyl0VtC2X/qIu+iVfd54/E2vr5A==");
@@ -104,7 +105,6 @@ namespace Adeon.iOS
             applicationDidBecomeActiveObserver = NSNotificationCenter.DefaultCenter.AddObserver(UIApplication.DidBecomeActiveNotification, ApplicationDidBecomeActive);
         }
 
-
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
@@ -121,7 +121,6 @@ namespace Adeon.iOS
             // Release any cached data, images, etc that aren't in use.
         }
 
-        /* FORSE POSSO CANCELLARLO */
         public override void ViewWillTransitionToSize(CGSize toSize, IUIViewControllerTransitionCoordinator coordinator)
         {
             if (coordinator != null)
@@ -164,14 +163,9 @@ namespace Adeon.iOS
         #region Private Methods
         private void LoadArExperience()
         {
-            WTFeatures requiredFeatures = WTFeatures.Geo;
+            NSUrl fullArExperienceURL = NSBundle.MainBundle.GetUrlForResource("index", "html", "Milan/");
+            loadingArExperienceNavigation = architectView.LoadArchitectWorldFromURL(fullArExperienceURL);
 
-            ArExperienceAuthorizationController.AuthorizeRestricedAPIAccess(authorizationRequestManager, requiredFeatures, () => {
-                NSUrl fullArExperienceURL = NSBundle.MainBundle.GetUrlForResource("index", "html", "Milan");
-                loadingArExperienceNavigation = architectView.LoadArchitectWorldFromURL(fullArExperienceURL);
-            }, (UIAlertController alertController) => {
-                PresentViewController(alertController, true, null);
-            });
         }
 
         private void StartArchitectViewRendering()
@@ -180,14 +174,7 @@ namespace Adeon.iOS
             {
                 architectView.Start((WTArchitectStartupConfiguration architectStartupConfiguration) =>
                 {
-                    if (currentCaptureDevicePosition != AVCaptureDevicePosition.Unspecified)
-                    {
-                        architectStartupConfiguration.CaptureDevicePosition = currentCaptureDevicePosition;
-                    }
-                    else
-                    {
-                        architectStartupConfiguration.CaptureDevicePosition = AVCaptureDevicePosition.Back;
-                    }
+                    architectStartupConfiguration.CaptureDevicePosition = AVCaptureDevicePosition.Back;
                     architectStartupConfiguration.CaptureDeviceResolution = WTCaptureDeviceResolution.WTCaptureDeviceResolution_AUTO;
                     architectStartupConfiguration.CaptureDeviceFocusMode = AVCaptureFocusMode.ContinuousAutoFocus;
                 }, (bool success, NSError error) =>
@@ -197,6 +184,7 @@ namespace Adeon.iOS
             }
         }
 
+
         private void StopArchitectViewRendering()
         {
             if (isRunning)
@@ -205,5 +193,7 @@ namespace Adeon.iOS
             }
         }
         #endregion
+
+
     }
 }
