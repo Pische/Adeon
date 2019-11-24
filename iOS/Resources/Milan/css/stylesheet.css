@@ -93,13 +93,14 @@ p, ol li{
 
 #help{
     margin-top: 11vh !important;
+    z-index: 2;
 }
 
 
 /*BOX SWIPE UP*/
 .box{
     position:fixed;
-    bottom:-100%;
+    bottom:-15vh;
     height: 15vh;
     width: 100%;
     background: rgba(25,0,4,.85);
@@ -238,7 +239,7 @@ p, ol li{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 80%;
+    height: auto;
     width: 85%;
     text-align: center;
     box-sizing:border-box;

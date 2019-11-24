@@ -25,6 +25,7 @@ var World = {
 
     maxRange: 3000,
     minDistance: 100,
+    velFadeOutIn: 600,
 
     locationUpdateCounter: 0,
     updatePlacemarkDistancesEveryXLocationUpdates: 5,
@@ -188,7 +189,7 @@ var World = {
             marker.distanceToUser <= World.minDistance) {
 
             World.currentMarker = marker;
-            $("#footer").fadeOut(600);
+            $("#footer").fadeOut(World.velFadeOutIn);
 
             World.showAneddoto();
 
@@ -265,11 +266,11 @@ var World = {
         if (World.firstAneddoto == true) {
             i = 0;
             while (i < 2) {
-                $("#hand-scroll").fadeIn(600);
+                $("#hand-scroll").fadeIn(World.velFadeOutIn);
                 $("#hand-scroll").animate({
                     top: '-=10%'
                 }, 2000);
-                $("#hand-scroll").fadeOut(600);
+                $("#hand-scroll").fadeOut(World.velFadeOutIn);
                 $("#hand-scroll").animate({
                     top: '+=10%'
                 }, 1);
@@ -279,11 +280,11 @@ var World = {
 
             $("#hand-scroll").promise().done(function () {
                 while (i < 2) {
-                    $("#hand-next").fadeIn(600);
+                    $("#hand-next").fadeIn(World.velFadeOutIn);
                     $("#hand-next").animate({
                         right: '+=45%'
                     }, 2000);
-                    $("#hand-next").fadeOut(600);
+                    $("#hand-next").fadeOut(World.velFadeOutIn);
                     $("#hand-next").animate({
                         right: '-=45%'
                     }, 1);
@@ -293,11 +294,11 @@ var World = {
                 i = 0;
                 $("#hand-next").promise().done(function () {
                     while (i < 2) {
-                        $("#hand-close").fadeIn(600);
+                        $("#hand-close").fadeIn(World.velFadeOutIn);
                         $("#hand-close").animate({
                             top: '+=45%'
                         }, 2000);
-                        $("#hand-close").fadeOut(600);
+                        $("#hand-close").fadeOut(World.velFadeOutIn);
                         $("#hand-close").animate({
                             top: '-=45%'
                         }, 1);
@@ -310,7 +311,7 @@ var World = {
         }
 
         /* Mostro box aneddoti*/
-        $("#box-aneddoti").fadeIn(600);
+        $("#box-aneddoti").fadeIn(World.velFadeOutIn);
 
         /* Swipe down e swipe left sul box aneddoti */
         $('#img-aneddoto').on('swipedown', function () {
@@ -320,8 +321,8 @@ var World = {
             $("#aneddoto-play").show();
             World.audio.stop();
             World.audio.destroy();
-            $("#box-aneddoti").fadeOut(600);
-            $("#footer").fadeIn(600);
+            $("#box-aneddoti").fadeOut(World.velFadeOutIn);
+            $("#footer").fadeIn(World.velFadeOutIn);
         });
 
         var exit2 = false;
@@ -338,7 +339,7 @@ var World = {
                     $("#aneddoto-play").show();
                     World.audio.stop();
                     World.audio.destroy();
-                    $("#box-aneddoti").fadeOut(600);
+                    $("#box-aneddoti").fadeOut(World.velFadeOutIn);
                     $("#box-aneddoti").promise().done(function () {
                         World.showAneddoto();
                     });
@@ -362,7 +363,7 @@ var World = {
                     $("#aneddoto-play").show();
                     World.audio.stop();
                     World.audio.destroy();
-                    $("#box-aneddoti").fadeOut(600);
+                    $("#box-aneddoti").fadeOut(World.velFadeOutIn);
 
                     //momentaneo per tornare indietro
                     World.currentAneddoto = null;
@@ -391,17 +392,18 @@ var World = {
     updateRangeValues: function updateRangeValuesFn() {
 
         if (World.firstTime == true) {
-            $("#hand-choose").stop(true).fadeOut(600);
-            $("#range-popup").fadeOut(600);
+            $("#hand-choose").stop(true).fadeOut(World.velFadeOutIn);
+            $("#range-popup").fadeOut(World.velFadeOutIn);
             $("#footer").show();
-            $("#swipeup").fadeIn(600);
-            $("#range").fadeIn(600);
-            $("#settings").fadeIn(600);
-            $("#help").fadeIn(600);
+            $("#swipeup").fadeIn(World.velFadeOutIn);
+            $("#range").fadeIn(World.velFadeOutIn);
+            $("#rangeValue").fadeIn(World.velFadeOutIn);
+            $("#settings").fadeIn(World.velFadeOutIn);
+            $("#help").fadeIn(World.velFadeOutIn);
 
             World.firstTime = false;
         }
-        $("#swipeup").fadeIn(600);
+        $("#swipeup").fadeIn(World.velFadeOutIn);
         $('#range-box').animate({ 'bottom': '-15vh' }, 300);
 
         /* Salvo il valore dello slider (1.0 - 3.0)*/
@@ -480,25 +482,28 @@ var World = {
 
     /* Display range slider. */
     showRange: function showRangeFn() {
-        $('#range-box').animate({ 'bottom': '0' }, 600);
-        $("#swipeup").hide();
+        World.checkPopupVisible("#range-box");
     },
 
     showSettings: function showSettingsFn() {
-        $("#footer").fadeOut(600);
-        $("#settings-popup").fadeIn(600);
+        $("#footer").fadeOut(World.velFadeOutIn);
+
+        World.checkPopupVisible("#settings-popup");
+
         $("#close-settings").on("click", function () {
-            $("#settings-popup").fadeOut(600);
-            $("#footer").fadeIn(600);
+            $("#settings-popup").fadeOut(World.velFadeOutIn);
+            $("#footer").fadeIn(World.velFadeOutIn);
         });
     },
 
     showHelp: function showHelpFn() {
-        $("#footer").fadeOut(600);
-        $("#help-popup").fadeIn(600);
+        $("#footer").fadeOut(World.velFadeOutIn);
+
+        World.checkPopupVisible("#help-popup");
+
         $("#close-help").on("click", function () {
-            $("#help-popup").fadeOut(600);
-            $("#footer").fadeIn(600);
+            $("#help-popup").fadeOut(World.velFadeOutIn);
+            $("#footer").fadeIn(World.velFadeOutIn);
         });
     },
 
@@ -510,23 +515,67 @@ var World = {
         return distanceToUserValue;
     },
 
+    checkPopupVisible: function checkPopupVisibleFn(popupToOpen) {
+        var error = "#error-popup";
+        var settings = "#settings-popup";
+        var help = "#help-popup";
+        var category = "#swipe-box";
+        var range = "#range-box";
+
+        if (error != popupToOpen && $(error).is(":visible")) {
+            $(error).fadeOut(World.velFadeOutIn);
+        }
+
+        if (settings != popupToOpen && $(settings).is(":visible")) {
+            $(settings).fadeOut(World.velFadeOutIn);
+        }
+
+        if (help != popupToOpen && $(help).is(":visible")) {
+            $(help).fadeOut(World.velFadeOutIn);
+        }
+
+        if (category != popupToOpen && $(category).css("bottom") == "0px") {
+            $(category).animate({ 'bottom': '-15vh' }, World.velFadeOutIn);
+            $("#footer").show();
+            $("#swipeup").show();
+        }
+
+        if (range != popupToOpen && $(range).css("bottom") == "0px") {
+            $(range).animate({ 'bottom': '-15vh' }, World.velFadeOutIn);
+            $("#footer").show();
+            $("#swipeup").show();
+        }
+
+        if (popupToOpen != category && popupToOpen != range) {
+            if (!$(popupToOpen).is(":visible")){
+                $(popupToOpen).fadeIn(World.velFadeOutIn);
+            }
+        }
+        else {
+            if ($(popupToOpen).css("bottom") != "0px") {
+                $(popupToOpen).animate({ 'bottom': '0' }, World.velFadeOutIn);
+                $("#swipeup").hide();
+            }
+        }
+    },
+
     /* WELCOME PAGE */
     welcomeToAdeon: function welcomeToAdeonFn() {
         if (World.firstTime == true) {
-            $("#welcome-popup").fadeIn(600);
+            $("#welcome-popup").fadeIn(World.velFadeOutIn);
 
             $("#welcome-popup").click(function () {
-                $("#welcome-popup").fadeOut(600);
-                $("#swipe-box").animate({ 'bottom': '0' }, 600);
-                $("#category-popup").fadeIn(600);
+                $("#welcome-popup").fadeOut(World.velFadeOutIn);
+                $("#swipe-box").animate({ 'bottom': '0' }, World.velFadeOutIn);
+                $("#category-popup").fadeIn(World.velFadeOutIn);
 
                 /* Animazione mano */
-                $("#hand-choose").fadeIn(600);
+                $("#hand-choose").fadeIn(World.velFadeOutIn);
 
                 $("#hand-choose").animate({
                     left: '+=65%'
                 }, 2400);
-                $("#hand-choose").fadeOut(600);
+                $("#hand-choose").fadeOut(World.velFadeOutIn);
                 $("#hand-choose").animate({
                     left: '-=65%'
                 }, 1);
@@ -538,46 +587,45 @@ var World = {
     /* Categoria Selezionata (art, architecture, secret_spots) */
     onArt: function onArtFn() {
         World.selectArt();
-        World.closeCategory();
         World.ctrlFirstTime();
+        World.closeCategory();
         World.refreshPoi();
     },
 
     onArchitecture: function onArchitectureFn() {
         World.selectArchitecture();
-        World.closeCategory();
         World.ctrlFirstTime();
+        World.closeCategory();
         World.refreshPoi();
     },
 
     onSecret: function onSecretFn() {
         World.selectSecret();
-        World.closeCategory();
         World.ctrlFirstTime();
+        World.closeCategory();
         World.refreshPoi();
     },
 
     ctrlFirstTime: function ctrlFirstTime() {
         if (World.firstTime == true) {
-            $("#category-popup").fadeOut(600);
-            $("#range-popup").fadeIn(600);
+            $("#category-popup").fadeOut(World.velFadeOutIn);
+            $("#range-popup").fadeIn(World.velFadeOutIn);
 
             /* Animazione mano */
             $("#hand-choose").stop(true).hide();
             $("#hand-choose").css("left", "10%");
-            $("#hand-choose").fadeIn(600);
+            $("#hand-choose").fadeIn(World.velFadeOutIn);
             $("#hand-choose").animate({
                 left: "+=60%"
             }, 2400);
             $("#hand-choose").animate({
                 left: "-=60%"
             }, 2400);
-            $("#hand-choose").fadeOut(600);
+            $("#hand-choose").fadeOut(World.velFadeOutIn);
         }
     },
 
     closeCategory: function closeCategoryFn() {
-        $('#swipe-box').animate({ 'bottom': '-15vh' }, 600);
         World.showRange();
     },
 
@@ -617,6 +665,7 @@ $(document).ready(function () {
 
     /* Nascondo le main icons*/
     $("#range").hide();
+    $("#rangeValue").hide();
     $("#settings").hide();
     $("#help").hide();
     $("#footer").hide();
@@ -636,13 +685,13 @@ $(document).ready(function () {
 
     /* CATEGORIE */
     $('#footer').on('swipeup', function () {
-        $('#swipe-box').animate({'bottom': '0'}, 600);
+        $('#swipe-box').animate({'bottom': '0'}, World.velFadeOutIn);
         $("#swipeup").hide();
     });
 
     $('#swipe-box').on('swipedown', function () {
         if (!World.firstTime) {
-            $('#swipe-box').animate({'bottom': '-15vh'}, 600);
+            $('#swipe-box').animate({'bottom': '-15vh'}, World.velFadeOutIn);
             $("#swipeup").show();
         }
     });
@@ -650,7 +699,8 @@ $(document).ready(function () {
     /* RANGE */
     $('#range-box').on('swipedown', function () {
         if (!World.firstTime) {
-            $('#range-box').animate({'bottom': '-15vh'}, 600);
+            $('#range-box').animate({ 'bottom': '-15vh' }, World.velFadeOutIn);
+            $("#footer").show();
             $("#swipeup").show();
         }
     });
@@ -658,6 +708,10 @@ $(document).ready(function () {
     /* Aggiorna il valore del range quando lo slider viene aggiornato*/
     $("#sliderAdeon").on("slidestop", function (e) {
         World.updateRangeValues();
+    });
+
+    $("#sliderAdeon").change(function () {
+        $("#rangeValue").text($("#sliderAdeon").val());
     });
 });
 

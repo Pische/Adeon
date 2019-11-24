@@ -16,7 +16,7 @@
 {
     margin: auto;
     width: 50vw;
-    height: 8px;
+    height: 10px;
 }
 
 #sliderAdeon {
@@ -75,4 +75,17 @@
 
 .maxKm{
     right: 10vw;
+}
+
+#rangeValue{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#rangeValue, .ui-slider-popup{
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
 }
