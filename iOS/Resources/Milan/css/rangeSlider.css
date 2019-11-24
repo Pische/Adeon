@@ -16,12 +16,12 @@
 {
     margin: auto;
     width: 50vw;
-    height: 12px;
+    height: 8px;
 }
 
 #sliderAdeon {
     position: absolute;
-    margin-top: 50%;
+    margin-top: 40%;
 }
 
 .ui-bar-t{
@@ -31,6 +31,8 @@
 }
 
 .ui-bar-t .ui-btn{
+    width: 22px;
+    height: 22px;
     border-radius: 100% !important;
     background-color: #CE4257 !important;
     border-color: #CE4257 !important;
@@ -45,8 +47,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    width: 41px;
-    height: 41px;
+    width: 37px;
+    height: 37px;
     opacity: 1;
     font-size: 15px;
     color: white !important;
@@ -54,6 +56,7 @@
     border: 0px;
     box-shadow: 0 0 0 0;
     display: block !important;
+    top: -46px !important;
 }
 
 .ui-slider-track .ui-btn-active{
