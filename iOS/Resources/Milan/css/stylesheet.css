@@ -393,21 +393,6 @@ p, ol li{
     width: auto;
     height: 40px;
 }
-/* SLIDER */
-
-/* Hide the number input */
-.full-width-slider input {
-    display: none;
-}
-.full-width-slider .ui-slider-track {
-    margin: 0 auto;
-    width: 50%;
-}
-
-.slider-container{
-    margin: auto;
-    text-align: center;
-}
 
 /* fixes focus scrolling*/
 html .ui-page-active {

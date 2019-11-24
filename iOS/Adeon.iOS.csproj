@@ -75,9 +75,9 @@
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <IOSDebuggerPort>37520</IOSDebuggerPort>
-    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchLink>Full</MtouchLink>
     <MtouchArch>ARM64</MtouchArch>
-    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
     <CodesignProvision>iOS Team Provisioning Profile: com.adeonAR.Adeon</CodesignProvision>
   </PropertyGroup>
@@ -188,6 +188,9 @@
     <BundleResource Include="Resources\Milan\assets\POI\img\PinacotecaDiBrera_1.png" />
     <BundleResource Include="Resources\Milan\assets\POI\img\GiardiniPubbliciDiPortaVenezia_1.png" />
     <BundleResource Include="Resources\Milan\assets\POI\img\Palestro_1.png" />
+    <BundleResource Include="Resources\Milan\css\rangeSlider.css" />
+    <BundleResource Include="Resources\Milan\css\range.png" />
+    <BundleResource Include="Resources\Milan\js\rangeSlider.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Milan\css\fonts\" />

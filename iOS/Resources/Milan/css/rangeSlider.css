@@ -1,0 +1,75 @@
+﻿/* SLIDER */
+
+.slider-container{
+    height: auto;
+    width: 100%;
+    margin-top: 7vh !important;
+    position: absolute;
+}
+
+/* Hide the number input */
+.slider-container input {
+    display: none;
+}
+
+.slider-container .ui-slider-track
+{
+    margin: auto;
+    width: 50vw;
+    height: 12px;
+}
+
+#sliderAdeon {
+    position: absolute;
+    margin-top: 50%;
+}
+
+.ui-bar-t{
+    background-color: rgba(255,127,81,.5) !important;
+    border-radius: 0px !important;
+    border: 0px !important;
+}
+
+.ui-bar-t .ui-btn{
+    border-radius: 100% !important;
+    background-color: #CE4257 !important;
+    border-color: #CE4257 !important;
+}
+
+.ui-bar-t .ui-btn:focus{
+    box-shadow: 0 0 0 0;
+}
+
+.ui-slider-popup{
+    background-image: url("range.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 41px;
+    height: 41px;
+    opacity: 1;
+    font-size: 15px;
+    color: white !important;
+    padding-top: 7px;
+    border: 0px;
+    box-shadow: 0 0 0 0;
+    display: block !important;
+}
+
+.ui-slider-track .ui-btn-active{
+    background-color: #FF7F51 !important;
+}
+
+.minKm, .maxKm{
+    position: absolute;
+    top: 8vh;
+    color: white;
+}
+
+.minKm{
+    left: 10vw;
+}
+
+.maxKm{
+    right: 10vw;
+}

@@ -27,6 +27,7 @@
     <script type="text/javascript" src="jquery/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="jquery/jquery.mobile-1.4.5.min.js"></script>
 
+
     <!-- Script per swipe up-->
     <script type="text/javascript" src="js/swipeup.js"></script>
 
@@ -35,6 +36,10 @@
 
     <!-- World logic-->
     <script type="text/javascript" src="js/WorldLogic.js"></script>
+
+    <!-- Rappresentazione range slider -->
+    <script type="text/javascript" src="js/rangeSlider.js"></script>
+    <link rel="stylesheet" href="css/rangeSlider.css" />
 </head>
 <body>
     <div data-role="page" style="background: none; height: 100vh !important;">
@@ -84,10 +89,13 @@
 
         <!-- RANGE BOX -->
         <div class="box" id="range-box">
-            <!--  SLIDER -->
-            <div class="full-width-slider">
-                <input type="range" name="slider-12" id="slider-12" min="1" max="3" value="3" step="0.1"
-                        data-show-value="true">
+            <div style="height:auto;">
+                <span class="minKm">1km</span>
+                <div class="slider-container">
+                    <input type="range" id="sliderAdeon" min="1" max="3" value="3" step="0.1" data-show-value="false"
+                           data-track-theme="t" data-theme="t" data-highlight="true" data-popup-enabled="true" readonly>
+                </div>
+                <span class="maxKm">3km</span>
             </div>
         </div>
 

@@ -405,7 +405,7 @@ var World = {
         $('#range-box').animate({ 'bottom': '-15vh' }, 300);
 
         /* Salvo il valore dello slider (1.0 - 3.0)*/
-        var slider_value = $("#slider-12").val();
+        var slider_value = $("#sliderAdeon").val();
 
         /* Max range relative to the maximum distance of all visible places.*/
         var RangeUserValue = slider_value * 1000;
@@ -656,7 +656,7 @@ $(document).ready(function () {
     });
 
     /* Aggiorna il valore del range quando lo slider viene aggiornato*/
-    $("#slider-12").on("slidestop", function (e) {
+    $("#sliderAdeon").on("slidestop", function (e) {
         World.updateRangeValues();
     });
 });

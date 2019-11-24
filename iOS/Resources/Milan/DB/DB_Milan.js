@@ -47,7 +47,7 @@ var DB_Milan = [
     },
     /* PROVA CASA VINCENZO */
     {
-        "id": "2",
+        "id": "1",
         "longitude": 9.238569,
         "latitude": 45.290050,
         "altitude": AR.CONST.UNKNOWN_ALTITUDE,
