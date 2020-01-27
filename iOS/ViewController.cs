@@ -13,7 +13,6 @@ namespace Adeon.iOS
     public partial class ViewController : UIViewController
     {
         protected WTArchitectView architectView;
-        //protected ArchitectDelegate delegateObject;
 
         [Weak]
         protected WTNavigation loadedArExperienceNavigation;
@@ -22,7 +21,8 @@ namespace Adeon.iOS
         protected NSObject applicationWillResignActiveObserver;
         protected NSObject applicationDidBecomeActiveObserver;
 
-        private WTAuthorizationRequestManager authorizationRequestManager = new WTAuthorizationRequestManager();
+        private WTAuthorizationRequestManager authorizationRequestManager =
+            new WTAuthorizationRequestManager();
 
         protected bool isRunning;
 
@@ -30,9 +30,21 @@ namespace Adeon.iOS
         {
             base.ViewDidLoad();
 
-
             architectView = new WTArchitectView();
-            architectView.SetLicenseKey("rXxGPSn4WA2Bkg6vd1j176qXR6Y9iKULHtta8L2EFDvj8NZymFAkUWOlC8fgj6oUE59u7DLgXTAqU1we2tmkQ2drwhcaxx/FxxJacaM0462FMqDElT7a6klWFLSaf/7B20kiUmiHcriRWTS4lX3l+xN6+X/rwV+DIL+OXZsEf9hTYWx0ZWRfX0/WkNROVvDYiF7eGx0lP/XutcXlZX2otUyKY1s/Q1AxtFtrHRvEeUw11Ti+2O/qij12LF/cOdPMEL2/bKe0bbFHCVJR/lpQEvxG7o25We3l58t1ZPsDzOziNvxD4g8e5HHCILFwFXzesbOMLhc+LrdulPh6sUsrmGiJOmln7dPyHMgxWRa8rYuUR19hRihOftJ1593Pkz1j324PDUoNKYWeHt2gYzc4z3Prdy/oCO3g5hBdrFLnsRdWzfdjyVNR34b+iaCcnUckSMCQ2k7RohreNh5JEDK5DMHCD7dbUc//SS7qFbjmd8V/rworMeA4X/VuZPaJrufYUzXHZJV2xp3zjrF0qj/dO+E2mBA1kJwnZ0LE4XmDwAElabT0U3K4E2lM4UR+I3r3SNj3/6K4SVKs+wtbk5ie8TkYbfXhkWQKeug8Bn1lOsPVKGUuAxRtCni4L2HQpQ2vtbDZgdVaEAMRjPRoEmx0txT3W1FNJhkJCTUL05jM/sEn3VcCEzUxKA+snBjk9ys+D497kw/FL/qW81bHWPi6gNev8LNLxzgdvrcoCBepMko5HrGq0UyJNOg8Xz+Zyl0VtC2X/qIu+iVfd54/E2vr5A==");
+            architectView.SetLicenseKey("nOWpqguR1RdC+q9h0BF0uNibUThZg288B" +
+                "2lgjTgv84TNLE7MtqmJ6BlheG7XEG4GQelAwtgj4CRVJWw1dR2Seto7le" +
+                "ZahvvF2JM16d3P8SqTgUvdDZyvKV9m3mD5Qh9nXmaUWcUBU75kCU4o+EI" +
+                "RkV1ZSgwvY/hPytsrzIW5iXlTYWx0ZWRfX21XYTkzCZni0X6HvP90/Xbu" +
+                "VlzHURC27ySO32WnIOYy9yP4oExzemrEDve+iOa5ceAc27628nnPLIWUW" +
+                "scAGBLA1SFOVXQzyaJtyShuJN4FMfoEy265m/1dEFdJdLel+jFiZqAofx" +
+                "d3WDrBzOX+bpyuc3A6cIjN9KAdvFdbqQvjfL5ncLe9zeekc5N5PJESwwG" +
+                "6+zBS4iTZMwBgPZYON+PSxhEuJ/wMvYVdKbn8EQNgTWb7sWIoSno0ADTX" +
+                "62qxDGy5PhuAl4sk7ksefUirANtuxKrIb+7QUl57FOBtCLigWDzLeG+Ci" +
+                "g+ZKGPPxWUNYOD5h1XJdoZRK1a+rbWiko3Bdzz13XHxhAVoKJvDo22e09" +
+                "aeYkgGiLayjvkb+hT3I/+OeBrw1T+FnACWU+Bw9+3iQF06LZYEiCH/4S+" +
+                "EpQ4ggIPZZYszNvMZenFhR7WCWySKBne2aja79KlsXUyO0q03YoQRXmv7" +
+                "Gzuy1ahJlihgFMyf94/Q/uo2+xXoXXwjU5BXEXzgQWWwo5vyYWpKKGk9b" +
+                "c8FogsuCxklmh7KJ0ZMbg++uBiL+H8=");
             architectView.RequiredFeatures = WTFeatures.Geo;
             architectView.TranslatesAutoresizingMaskIntoConstraints = false;
             Add(architectView);
@@ -49,8 +61,28 @@ namespace Adeon.iOS
         {
             base.ViewWillAppear(animated);
 
+            /*  Controllo sul primo avvio dell'app sul dispositivo per mostrare
+                il tutorial o meno
+             */
+            string firstTime = "" + NSUserDefaults.StandardUserDefaults.BoolForKey("FirstTime");
+            string fn = "";
+            if (firstTime == "False"){
+                fn = "World.setFirstTime(true);";
+            }
+            else
+            {
+                fn = "World.setFirstTime(false);";
+            }
+
             LoadArExperience();
             StartArchitectViewRendering();
+            architectView.CallJavaScript(fn);
+            //architectView.CallJavaScript("World.setFirstTime(false);"); //sostituzione momentanea
+
+            if (firstTime == "False")
+            {
+                NSUserDefaults.StandardUserDefaults.SetBool(true, "FirstTime");
+            }
 
             applicationWillResignActiveObserver = NSNotificationCenter.DefaultCenter.AddObserver(UIApplication.WillResignActiveNotification, ApplicationWillResignActive);
             applicationDidBecomeActiveObserver = NSNotificationCenter.DefaultCenter.AddObserver(UIApplication.DidBecomeActiveNotification, ApplicationDidBecomeActive);
@@ -61,7 +93,16 @@ namespace Adeon.iOS
         {
             base.ViewDidDisappear(animated);
 
+
+            //rilascia la variabile per i test, così è sempre come se fosse il primo avvio
+            /*if ("" + NSUserDefaults.StandardUserDefaults.BoolForKey("FirstTime") == "False")
+            {
+                NSUserDefaults.StandardUserDefaults.SetBool(true, "FirstTime");
+            }*/
+
             StopArchitectViewRendering();
+
+
 
             NSNotificationCenter.DefaultCenter.RemoveObserver(applicationWillResignActiveObserver);
             NSNotificationCenter.DefaultCenter.RemoveObserver(applicationDidBecomeActiveObserver);
@@ -96,9 +137,7 @@ namespace Adeon.iOS
         #region Private Methods
         private void LoadArExperience()
         {
-            WTFeatures requiredFeatures = WTFeatures.Geo;
-
-            ArExperienceAuthorizationController.AuthorizeRestricedAPIAccess(authorizationRequestManager, requiredFeatures, () => {
+            ArExperienceAuthorizationController.AuthorizeRestricedAPIAccess(authorizationRequestManager, WTFeatures.Geo, () => {
                 NSUrl fullArExperienceURL = NSBundle.MainBundle.GetUrlForResource("index", "html", "Milan");
                 loadingArExperienceNavigation = architectView.LoadArchitectWorldFromURL(fullArExperienceURL);
             }, (UIAlertController alertController) => {
@@ -126,6 +165,7 @@ namespace Adeon.iOS
         {
             if (isRunning)
             {
+                NSUserDefaults.StandardUserDefaults.RemoveObject("FirstTime");
                 architectView.Stop();
             }
         }

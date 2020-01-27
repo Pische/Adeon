@@ -30,6 +30,19 @@ var World = {
     locationUpdateCounter: 0,
     updatePlacemarkDistancesEveryXLocationUpdates: 5,
 
+    setFirstTime: function setFirstTimeFn(ft) {
+        //alert(""+ft);
+        if (ft == true) {
+            World.firstTime = true;
+            World.welcomeToAdeon();
+        }
+        else {
+            
+            World.firstTime = false;
+            $("#swipe-box").animate({ 'bottom': '0' }, World.velFadeOutIn);
+        }
+    },
+
     loadMarkerDrawable: function loadMarkerDrawableFn() {
 
         /* Carico immagini marker in base alla categoria scelta */
@@ -394,6 +407,8 @@ var World = {
         if (World.firstTime == true) {
             $("#hand-choose").stop(true).fadeOut(World.velFadeOutIn);
             $("#range-popup").fadeOut(World.velFadeOutIn);
+
+            /*l'avevo commentata*/
             $("#footer").show();
             $("#swipeup").fadeIn(World.velFadeOutIn);
             $("#range").fadeIn(World.velFadeOutIn);
@@ -403,6 +418,14 @@ var World = {
 
             World.firstTime = false;
         }
+        else {
+            $("#footer").show();
+            $("#range").fadeIn(World.velFadeOutIn);
+            $("#rangeValue").fadeIn(World.velFadeOutIn);
+            $("#settings").fadeIn(World.velFadeOutIn);
+            $("#help").fadeIn(World.velFadeOutIn);
+        }
+
         $("#swipeup").fadeIn(World.velFadeOutIn);
         $('#range-box').animate({ 'bottom': '-15vh' }, 300);
 
@@ -679,7 +702,7 @@ $(document).ready(function () {
     /* Nascondo box aneddoti */
     $("#box-aneddoti").hide();
 
-    World.welcomeToAdeon();
+    //World.welcomeToAdeon();
 
     /* Funzioni di swipe up e swipe down dei pannelli */
 
