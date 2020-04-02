@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleName</key>
-	<string>Adeon</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.adeonAR.adeon</string>
 	<key>CFBundleShortVersionString</key>
@@ -13,14 +11,14 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>13.0</string>
+	<string>13.3</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
 		<integer>2</integer>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>Main</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIMainStoryboardFile~ipad</key>
@@ -43,12 +41,16 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Adeon requires access to your current location information (GPS) is needed to find the nearest points of interest around your current position.</string>
+	<string>Adeon richiede l&apos;accesso alla tua posizione (GPS). È necessario affinché possa cercare i punti di interesse attorno a te in base alla tua posizione.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Adeon requires access to the camera is needed to display augmented reality content on top of your camera image.</string>
+	<string>Adeon richiede l&apos;accesso alla tua fotocamera. È necessario affinchè possa mostrare i contenuti di realtà aumentata sulle immagini della tua fotocamera.</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>UIApplicationSceneManifest</key>
 	<dict/>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleName</key>
+	<string>Adeon</string>
 </dict>
 </plist>

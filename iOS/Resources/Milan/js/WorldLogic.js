@@ -26,6 +26,8 @@ var World = {
     maxRange: 3000,
     minDistance: 100,
     velFadeOutIn: 600,
+    velSwipe: 300,
+    velMani: 1500,
 
     locationUpdateCounter: 0,
     updatePlacemarkDistancesEveryXLocationUpdates: 5,
@@ -281,11 +283,11 @@ var World = {
             while (i < 2) {
                 $("#hand-scroll").fadeIn(World.velFadeOutIn);
                 $("#hand-scroll").animate({
-                    top: '-=10%'
-                }, 2000);
+                    top: '-=15%'
+                }, World.velMani);
                 $("#hand-scroll").fadeOut(World.velFadeOutIn);
                 $("#hand-scroll").animate({
-                    top: '+=10%'
+                    top: '+=15%'
                 }, 1);
                 i++;
             }
@@ -296,7 +298,7 @@ var World = {
                     $("#hand-next").fadeIn(World.velFadeOutIn);
                     $("#hand-next").animate({
                         right: '+=45%'
-                    }, 2000);
+                    }, World.velMani);
                     $("#hand-next").fadeOut(World.velFadeOutIn);
                     $("#hand-next").animate({
                         right: '-=45%'
@@ -310,7 +312,7 @@ var World = {
                         $("#hand-close").fadeIn(World.velFadeOutIn);
                         $("#hand-close").animate({
                             top: '+=45%'
-                        }, 2000);
+                        }, World.velMani);
                         $("#hand-close").fadeOut(World.velFadeOutIn);
                         $("#hand-close").animate({
                             top: '-=45%'
@@ -427,7 +429,7 @@ var World = {
         }
 
         $("#swipeup").fadeIn(World.velFadeOutIn);
-        $('#range-box').animate({ 'bottom': '-15vh' }, 300);
+        $('#range-box').animate({ 'bottom': '-15vh' }, World.velSwipe);
 
         /* Salvo il valore dello slider (1.0 - 3.0)*/
         var slider_value = $("#sliderAdeon").val();
@@ -442,6 +444,7 @@ var World = {
             $("#error-popup").show();
             $("#error-button").click(function () {
                 $("#error-popup").hide();
+                World.showRange();
             });
         }
 
@@ -564,7 +567,7 @@ var World = {
         }
 
         if (range != popupToOpen && $(range).css("bottom") == "0px") {
-            $(range).animate({ 'bottom': '-15vh' }, World.velFadeOutIn);
+            $(range).animate({ 'bottom': '-15vh' }, World.velSwipe);
             $("#footer").show();
             $("#swipeup").show();
         }
@@ -576,7 +579,7 @@ var World = {
         }
         else {
             if ($(popupToOpen).css("bottom") != "0px") {
-                $(popupToOpen).animate({ 'bottom': '0' }, World.velFadeOutIn);
+                $(popupToOpen).animate({ 'bottom': '0' }, World.velSwipe);
                 $("#swipeup").hide();
             }
         }
@@ -589,7 +592,7 @@ var World = {
 
             $("#welcome-popup").click(function () {
                 $("#welcome-popup").fadeOut(World.velFadeOutIn);
-                $("#swipe-box").animate({ 'bottom': '0' }, World.velFadeOutIn);
+                $("#swipe-box").animate({ 'bottom': '0' }, World.velSwipe);
                 $("#category-popup").fadeIn(World.velFadeOutIn);
 
                 /* Animazione mano */
@@ -597,7 +600,7 @@ var World = {
 
                 $("#hand-choose").animate({
                     left: '+=65%'
-                }, 2400);
+                }, World.velMani);
                 $("#hand-choose").fadeOut(World.velFadeOutIn);
                 $("#hand-choose").animate({
                     left: '-=65%'
@@ -640,10 +643,10 @@ var World = {
             $("#hand-choose").fadeIn(World.velFadeOutIn);
             $("#hand-choose").animate({
                 left: "+=60%"
-            }, 2400);
+            }, World.velMani);
             $("#hand-choose").animate({
                 left: "-=60%"
-            }, 2400);
+            }, World.velMani);
             $("#hand-choose").fadeOut(World.velFadeOutIn);
         }
     },
@@ -708,13 +711,13 @@ $(document).ready(function () {
 
     /* CATEGORIE */
     $('#footer').on('swipeup', function () {
-        $('#swipe-box').animate({'bottom': '0'}, World.velFadeOutIn);
+        $('#swipe-box').animate({'bottom': '0'}, World.velSwipe);
         $("#swipeup").hide();
     });
 
     $('#swipe-box').on('swipedown', function () {
         if (!World.firstTime) {
-            $('#swipe-box').animate({'bottom': '-15vh'}, World.velFadeOutIn);
+            $('#swipe-box').animate({ 'bottom': '-15vh' }, World.velSwipe);
             $("#swipeup").show();
         }
     });
@@ -722,7 +725,7 @@ $(document).ready(function () {
     /* RANGE */
     $('#range-box').on('swipedown', function () {
         if (!World.firstTime) {
-            $('#range-box').animate({ 'bottom': '-15vh' }, World.velFadeOutIn);
+            $('#range-box').animate({ 'bottom': '-15vh' }, World.velSwipe);
             $("#footer").show();
             $("#swipeup").show();
         }

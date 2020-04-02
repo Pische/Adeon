@@ -222,7 +222,7 @@ p, ol li{
     background-color: #720026;
     border: 2px solid #720026;
     color: white;
-    border-radius: 10px;
+    border-radius: 20px 20px 0px 0px;
     width: auto;
     margin:0 auto;
     margin-top: 20px;
@@ -271,12 +271,13 @@ p, ol li{
     padding: 3%;
 }
 
-#box-txt-inner{
+#box-txt-inner {
     overflow: scroll;
     width: 90%;
-    height: 40%;
-    text-align: center;
+    height: 60%;
+    /*text-align: center;*/
     margin: 0 auto;
+    text-align: justify !important;
 }
 
 #box-txt-inner::-webkit-scrollbar {
@@ -284,7 +285,7 @@ p, ol li{
 }
 
 
-#aneddoto-play, #aneddoto-pause{
+#aneddoto-play, #aneddoto-pause {
     height: auto;
     width: 15%;
     margin: 0 0 5% 0;
@@ -327,7 +328,7 @@ p, ol li{
 
 #hand-scroll{
     transform: translateX(-50%);
-    top: 80%;
+    top: 85%;
     left: 50%;
     margin: 0;
 }

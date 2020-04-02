@@ -95,6 +95,7 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
     <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo 120x120.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -129,7 +130,6 @@
     <BundleResource Include="Resources\Milan\jquery\images\icons-18-white.png" />
     <BundleResource Include="Resources\Milan\jquery\images\icons-36-black.png" />
     <BundleResource Include="Resources\Milan\css\stylesheet.css" />
-    <BundleResource Include="Resources\Milan\js\swipeup.js" />
     <BundleResource Include="Resources\Milan\css\fonts\.DS_Store" />
     <BundleResource Include="Resources\Milan\css\fonts\Montserrat-Medium.ttf" />
     <BundleResource Include="Resources\Milan\css\fonts\Poppins-SemiBold.ttf" />
@@ -191,6 +191,7 @@
     <BundleResource Include="Resources\Milan\css\rangeSlider.css" />
     <BundleResource Include="Resources\Milan\css\range.png" />
     <BundleResource Include="Resources\Milan\js\rangeSlider.js" />
+    <BundleResource Include="Resources\Milan\jquery\swipeup.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Milan\css\fonts\" />

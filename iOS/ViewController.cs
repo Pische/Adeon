@@ -21,8 +21,7 @@ namespace Adeon.iOS
         protected NSObject applicationWillResignActiveObserver;
         protected NSObject applicationDidBecomeActiveObserver;
 
-        private WTAuthorizationRequestManager authorizationRequestManager =
-            new WTAuthorizationRequestManager();
+        private WTAuthorizationRequestManager authorizationRequestManager = new WTAuthorizationRequestManager();
 
         protected bool isRunning;
 
@@ -31,20 +30,7 @@ namespace Adeon.iOS
             base.ViewDidLoad();
 
             architectView = new WTArchitectView();
-            architectView.SetLicenseKey("nOWpqguR1RdC+q9h0BF0uNibUThZg288B" +
-                "2lgjTgv84TNLE7MtqmJ6BlheG7XEG4GQelAwtgj4CRVJWw1dR2Seto7le" +
-                "ZahvvF2JM16d3P8SqTgUvdDZyvKV9m3mD5Qh9nXmaUWcUBU75kCU4o+EI" +
-                "RkV1ZSgwvY/hPytsrzIW5iXlTYWx0ZWRfX21XYTkzCZni0X6HvP90/Xbu" +
-                "VlzHURC27ySO32WnIOYy9yP4oExzemrEDve+iOa5ceAc27628nnPLIWUW" +
-                "scAGBLA1SFOVXQzyaJtyShuJN4FMfoEy265m/1dEFdJdLel+jFiZqAofx" +
-                "d3WDrBzOX+bpyuc3A6cIjN9KAdvFdbqQvjfL5ncLe9zeekc5N5PJESwwG" +
-                "6+zBS4iTZMwBgPZYON+PSxhEuJ/wMvYVdKbn8EQNgTWb7sWIoSno0ADTX" +
-                "62qxDGy5PhuAl4sk7ksefUirANtuxKrIb+7QUl57FOBtCLigWDzLeG+Ci" +
-                "g+ZKGPPxWUNYOD5h1XJdoZRK1a+rbWiko3Bdzz13XHxhAVoKJvDo22e09" +
-                "aeYkgGiLayjvkb+hT3I/+OeBrw1T+FnACWU+Bw9+3iQF06LZYEiCH/4S+" +
-                "EpQ4ggIPZZYszNvMZenFhR7WCWySKBne2aja79KlsXUyO0q03YoQRXmv7" +
-                "Gzuy1ahJlihgFMyf94/Q/uo2+xXoXXwjU5BXEXzgQWWwo5vyYWpKKGk9b" +
-                "c8FogsuCxklmh7KJ0ZMbg++uBiL+H8=");
+            architectView.SetLicenseKey("d4+aKxOGTRBB+f+buOI1eDVk9NY3wZaTCDiEsN2ZV9UilBwsDbXrWiY1bt8jBcFIWyDNHbZ037vHSeEc8zJ5YrB3AtEhc/FvaJOK6vJqkU6IPNKZK/zMac7bVmZjrP2v8ReUUokkd7hfj6//ReBXVNiQ3ePQ1Heg/XGPYUr7xMhTYWx0ZWRfX20XMtB7PZbGeCdS+PRqMDypqb7e2kiph6mSJTR8z9iPrBfK1fpdATxwtMDpN3Zxsy31d7Rs/KEDO4pj+36zd4sT4bANOiomixmfSxoFLXLdK9okHqx06Gpq5C+m0eE7tsECiIgAX9wLXrpuhX9/FhyNsGm2LmlQHIw0KLU3NUQBgEVwokwnkFT1Cp3Z/p4fa49J+0E/Fr8CitR0PTQtWiPHUF+wLAYGbnYo7qWWODjKRGTXDL4IDsSk5TCBtsZX459qz9VW2rUkLtBbNEqqDMqvFARfrumuX9Wmb+DZnofDQ/7BHdHn8O2tkSDdG3ZZwiAfj6EY2cnNkUOQX4lCnMa9IN8y8yJB3fCbx6oHTlOcXtgVzbqg6/xXc0Gf8QNYgp6k0id+Vgo2aySyqcP7InnC4KrcM6BiHRhsrfVGsyaGTVc16ltlzfkSaY7kSUPGQqxyY7Ghdiw4R7dDN0RufiEvmB6YHW4a/wnByt8ORFQnpLJn8HsZ7Qa1S3XSOEaHPLwFZKpUKwRE+YBffAilgO5CeznCTE0droljwo82pmxHSCsxygSN7gw7gEWIetv0Z/nHceDxO9Zl");
             architectView.RequiredFeatures = WTFeatures.Geo;
             architectView.TranslatesAutoresizingMaskIntoConstraints = false;
             Add(architectView);
@@ -76,8 +62,8 @@ namespace Adeon.iOS
 
             LoadArExperience();
             StartArchitectViewRendering();
-            architectView.CallJavaScript(fn);
-            //architectView.CallJavaScript("World.setFirstTime(false);"); //sostituzione momentanea
+            //architectView.CallJavaScript(fn);
+            architectView.CallJavaScript("World.setFirstTime(true);"); //sostituzione momentanea
 
             if (firstTime == "False")
             {
